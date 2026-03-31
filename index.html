@@ -6,7 +6,6 @@
     <title>Kokonut | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <script src="https://w.soundcloud.com/player/api.js"></script>
     <style>
         :root {
             --primary: #ffffff;
@@ -113,10 +112,6 @@
             en: { edu: "PTIT University (Hard Mode)", birth: "July 03, 2007", btn: "DON'T CLICK THIS", roles: ["Gemini Chatgpt Language Coder", "IELTS 9.0 (In my dreams)", "Master of 'Copy-Paste'", "Look at my code, not me", "Professional Ghoster"] }
         };
 
-        const scIframe = document.getElementById('sc-widget');
-        scIframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(CONFIG.musicUrl)}&auto_play=false&loop=true`;
-        const widget = SC.Widget(scIframe);
-
         function loadViews() {
             const username = "Kokonut-Original";
             fetch(`https://hits.dwyl.com/${username}/${username}.github.io.json`)
@@ -202,7 +197,7 @@
             document.getElementById('bg-video').load(); 
             document.getElementById('bg-video').play().catch(e => console.log(e));
             
-            widget.play();
+            document.getElementById('sc-widget').src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(CONFIG.musicUrl)}&auto_play=true&loop=true`;
             
             updateBio(); 
             type(); 
