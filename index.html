@@ -113,6 +113,10 @@
             en: { edu: "PTIT University (Hard Mode)", birth: "July 03, 2007", btn: "DON'T CLICK THIS", roles: ["Gemini Chatgpt Language Coder", "IELTS 9.0 (In my dreams)", "Master of 'Copy-Paste'", "Look at my code, not me", "Professional Ghoster"] }
         };
 
+        const scIframe = document.getElementById('sc-widget');
+        scIframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(CONFIG.musicUrl)}&auto_play=false&loop=true`;
+        const widget = SC.Widget(scIframe);
+
         function loadViews() {
             const username = "Kokonut-Original";
             fetch(`https://hits.dwyl.com/${username}/${username}.github.io.json`)
@@ -193,11 +197,16 @@
         
         function init() {
             document.getElementById('enter-screen').classList.add('fade-out');
+            
             document.querySelector('#bg-video source').src = CONFIG.backgroundUrl;
-            document.getElementById('bg-video').load(); document.getElementById('bg-video').play();
-            const widget = SC.Widget(document.getElementById('sc-widget'));
-            document.getElementById('sc-widget').src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(CONFIG.musicUrl)}&auto_play=true`;
-            updateBio(); type(); loadViews();
+            document.getElementById('bg-video').load(); 
+            document.getElementById('bg-video').play().catch(e => console.log(e));
+            
+            widget.play();
+            
+            updateBio(); 
+            type(); 
+            loadViews();
         }
         
         const bubbleContainer = document.getElementById('social-bubbles');
