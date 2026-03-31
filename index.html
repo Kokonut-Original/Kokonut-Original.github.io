@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokonut | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+
+    <style>
+        :root {
+            --primary: #ffffff;
+            --accent: #ecd608; 
+            --bg-glass: rgba(20, 20, 20, 0.55); 
+            --border-glass: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Thêm user-select: none để CHỐNG BÔI ĐEN CHỮ KHI VẼ */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; cursor: none; 
+            user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
+        }
+
+        body {
+            background: #000;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* --- BACKGROUND LAYERS --- */
+        #bg-video {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -4; 
+            filter: brightness(0.3);
+        }
+
+        #sakura-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -3; 
+            pointer-events: none;
+        }
+
+        #drawing-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2; 
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+            pointer-events: none; 
+        }
+
+        /* --- CLICK TO ENTER --- */
+        #enter-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer; /* Riêng nút này vẫn có cursor mặc định trước khi vào */
+            transition: 1s ease;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 5px;
+            color: var(--accent);
+            text-shadow: 0 0 15px var(--accent);
+        }
+        #enter-screen.fade-out { opacity: 0; pointer-events: none; transform: scale(1.1); }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            pointer-events: none; 
+        }
+
+        /* --- PROFILE CARD MỚI (GLASSMORPHISM SẮC NÉT) --- */
+        .profile-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-top: 1px solid rgba(255, 255, 255, 0.3); /* Cắt nét sáng đỉnh thẻ */
+            width: 400px;
+            padding: 80px 40px 40px; 
+            border-radius: 20px; 
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9), inset 0 0 20px rgba(255,255,255,0.02);
+            position: relative;
+            pointer-events: auto; 
+            margin-top: 50px; 
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- AVATAR VỚI HIỆU ỨNG NHỊP THỞ (PULSE) --- */
+        .avatar-container {
+            position: absolute;
+            top: -55px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .avatar {
+            width: 110px; 
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff; 
+            pointer-events: none;
+            animation: pulse-avatar 2s infinite alternate;
+        }
+
+        @keyframes pulse-avatar {
+            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 0 0 10px rgba(255, 255, 255, 0); }
+        }
+
+        /* --- NÚT ACTION NEON --- */
+        .action-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 30px;
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(236, 214, 8, 0.2);
+            pointer-events: auto;
+        }
+
+        .action-btn:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* --- SOCIAL BUBBLES --- */
+        .social-bubbles-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 5;
+            pointer-events: auto; 
+        }
+
+        .social-bubble {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            animation: bubble-float 4s ease-in-out infinite;
+        }
+
+        .social-bubble:nth-child(1) { animation-delay: 0s; }
+        .social-bubble:nth-child(2) { animation-delay: 1s; }
+        .social-bubble:nth-child(3) { animation-delay: 2s; }
+        .social-bubble:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes bubble-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(2deg); }
+            66% { transform: translateY(5px) rotate(-2deg); }
+        }
+
+        .social-bubble a {
+            color: white; font-size: 26px; transition: 0.3s; text-decoration: none; opacity: 0.6; pointer-events: auto;
+        }
+
+        .social-bubble:hover {
+            transform: translateY(-15px) scale(1.1);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        .social-bubble:hover a {
+            color: var(--accent); opacity: 1; text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* --- TYPOGRAPHY & DETAILS --- */
+        h1 { font-size: 24px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .typewriter-container { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 14px; min-height: 20px; margin-bottom: 25px; font-weight: bold; text-shadow: 0 0 8px rgba(236, 214, 8, 0.4); }
+        
+        /* Divider gradient mờ 2 đầu */
+        .divider { width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); margin: 0 auto 20px auto; }
+        
+        .details { font-size: 14px; color: #ccc; line-height: 2.2; margin-bottom: 10px; text-align: left; display: inline-block; }
+        .details i { color: var(--accent); width: 25px; text-align: center; margin-right: 10px; }
+
+        /* --- CUSTOM CURSOR --- */
+        #cursor {
+            width: 12px; height: 12px;
+            background: rgba(168, 85, 247, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 1);
+            transition: transform 0.1s ease;
+        }
+
+        .lang-btn {
+            position: fixed; top: 30px; right: 30px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white; padding: 8px 18px; border-radius: 8px;
+            font-size: 12px; font-weight: bold; cursor: pointer;
+            z-index: 100; transition: 0.3s; pointer-events: auto;
+        }
+        .lang-btn:hover { background: var(--accent); color: black; border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div id="enter-screen" onclick="init()">
+        [ CLICK TO ENTER ]
+    </div>
+
+    <iframe id="sc-widget" style="display:none;" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
+    
+    <video id="bg-video" loop muted playsinline><source src="" type="video/mp4"></video>
+
+    <canvas id="sakura-canvas"></canvas>
+    <canvas id="drawing-canvas"></canvas>
+    
+    <div class="overlay"></div>
+    <div id="cursor"></div>
+    <button class="lang-btn" onclick="toggleLang()">VI / EN</button>
+
+    <div class="container">
+        <div class="profile-card">
+            
+            <div class="avatar-container">
+                <img id="avatar-img" class="avatar" src="" alt="Avatar">
+            </div>
+            
+            <h1 id="name">KOKONUT</h1>
+            <div class="typewriter-container" id="typewriter"></div>
+            
+            <div class="divider"></div>
+            <div class="details" id="bio-content"></div>
+            
+            <br>
+            <a href="https://github.com/Kokonut-Original" target="_blank" class="action-btn" id="btn-text">DỰ ÁN CỦA TÔI</a>
+
+        </div>
+
+        <div class="social-bubbles-container" id="social-bubbles"></div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            backgroundUrl: "https://motionbgs.com/media/9121/large-cherry-blossom-tree.960x540.mp4",
+            
+            avatarUrl: "avatar.jpg", 
+            
+            musicUrl: "https://soundcloud.com/lenoir-352214365/giao-h-ng-thank-wolfgang",
+            
+            socials: [
+                { icon: "fa-brands fa-facebook", link: "https://www.facebook.com/backislayer" },
+                { icon: "fa-brands fa-instagram", link: "https://instagram.com/anhdangxuy_" },
+                { icon: "fa-brands fa-github", link: "https://github.com/Kokonut-Original" },
+                { icon: "fa-brands fa-discord", link: "https://discord.com/users/kokonut_original" }
+            ],
+
+            vi: {
+                edu: "Bổ Túc PTIT",
+                birth: "03/07/2007",
+                roles: ["Kĩ sư ngôn ngữ Chatgpt Gemini", "M nhìn cái chó j", "Donate t 5 củ"],
+                btn: "DỰ ÁN CỦA TÔI"
+            },
+            en: {
+                edu: "Student at PTIT University",
+                birth: "July 03, 2007",
+                roles: ["Gemini Chatgpt Language Coder", "Look at your ass", "Donate me 500 dolars"],
+                btn: "MY PROJECTS"
+            }
+        };
+
+        // --- 1. SAKURA (HOA ANH ĐÀO NÂNG CẤP) LOGIC ---
+        const sakuraCanvas = document.getElementById('sakura-canvas');
+        const sakuraCtx = sakuraCanvas.getContext('2d');
+        let petals = [];
+
+        function resizeSakura() {
+            sakuraCanvas.width = window.innerWidth;
+            sakuraCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeSakura);
+        resizeSakura();
+
+        class Petal {
+            constructor() { 
+                this.reset(); 
+                this.y = Math.random() * sakuraCanvas.height; 
+            }
+            reset() {
+                this.x = Math.random() * sakuraCanvas.width;
+                this.y = -10;
+                this.size = Math.random() * 5 + 3; 
+                this.speedY = Math.random() * 1.5 + 0.8;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.6 + 0.4;
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 0.04 - 0.02;
+                
+                this.flip = Math.random();
+                this.flipSpeed = Math.random() * 0.03 + 0.01;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.y / 50) * 0.5; 
+                this.angle += this.spin;
+                this.flip += this.flipSpeed; 
+                
+                if (this.y > sakuraCanvas.height + 20) this.reset();
+            }
+            draw() {
+                sakuraCtx.save();
+                sakuraCtx.translate(this.x, this.y);
+                sakuraCtx.rotate(this.angle);
+                
+                sakuraCtx.scale(1, Math.abs(Math.cos(this.flip))); 
+
+                let gradient = sakuraCtx.createLinearGradient(0, -this.size, 0, this.size);
+                gradient.addColorStop(0, `rgba(255, 183, 197, ${this.opacity})`);
+                gradient.addColorStop(1, `rgba(255, 107, 139, ${this.opacity})`);
+
+                sakuraCtx.fillStyle = gradient;
+                sakuraCtx.shadowBlur = 5;
+                sakuraCtx.shadowColor = `rgba(255, 183, 197, ${this.opacity * 0.5})`;
+
+                sakuraCtx.beginPath();
+                sakuraCtx.moveTo(0, -this.size);
+                sakuraCtx.bezierCurveTo(this.size * 1.5, -this.size / 2, this.size * 1.5, this.size, 0, this.size * 1.2);
+                sakuraCtx.bezierCurveTo(-this.size * 1.5, this.size, -this.size * 1.5, -this.size / 2, 0, -this.size);
+                sakuraCtx.fill();
+
+                sakuraCtx.restore();
+            }
+        }
+        
+        for (let i = 0; i < 60; i++) petals.push(new Petal());
+        
+        function animateSakura() {
+            sakuraCtx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateSakura);
+        }
+        animateSakura();
+
+        // --- 2. DRAWING LOGIC (MỰC TÍM) ---
+        const drawCanvas = document.getElementById('drawing-canvas');
+        const drawCtx = drawCanvas.getContext('2d');
+        let lines = [];
+        let isDrawing = false;
+        let currentLine = null;
+
+        function resizeDrawCanvas() {
+            drawCanvas.width = window.innerWidth;
+            drawCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeDrawCanvas);
+        resizeDrawCanvas();
+
+        window.addEventListener('mousedown', (e) => {
+            if(e.target.closest('.profile-card') || e.target.closest('.social-bubbles-container') || e.target.closest('.lang-btn')) return;
+            isDrawing = true;
+            currentLine = { points: [{x: e.clientX, y: e.clientY}], timestamp: Date.now() };
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            document.getElementById('cursor').style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            if (!isDrawing) return;
+            currentLine.points.push({x: e.clientX, y: e.clientY});
+        });
+
+        window.addEventListener('mouseup', () => { if (!isDrawing) return; isDrawing = false; lines.push(currentLine); currentLine = null; });
+
+        function animateDraw() {
+            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+            const now = Date.now();
+            const lifeSpan = 30000; 
+
+            lines = lines.filter(line => {
+                const age = now - line.timestamp;
+                if (age > lifeSpan) return false;
+                drawLine(line.points, 1 - (age / lifeSpan));
+                return true;
+            });
+            if (isDrawing && currentLine) drawLine(currentLine.points, 1);
+            requestAnimationFrame(animateDraw);
+        }
+
+        function drawLine(points, opacity) {
+            if (points.length < 2) return;
+            drawCtx.strokeStyle = `rgba(168, 85, 247, ${opacity})`; 
+            drawCtx.lineWidth = 4;
+            drawCtx.lineJoin = 'round';
+            drawCtx.lineCap = 'round';
+            drawCtx.shadowBlur = 10;
+            drawCtx.shadowColor = `rgba(168, 85, 247, ${opacity})`;
+            drawCtx.beginPath();
+            drawCtx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) drawCtx.lineTo(points[i].x, points[i].y);
+            drawCtx.stroke();
+            drawCtx.shadowBlur = 0; 
+        }
+        animateDraw();
+
+        // --- 3. SYSTEM LOGIC ---
+        let currentLang = 'vi';
+        let roleIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        document.querySelector('#bg-video source').src = CONFIG.backgroundUrl;
+        document.getElementById('bg-video').load();
+        document.getElementById('avatar-img').src = CONFIG.avatarUrl;
+        
+        const bubbleContainer = document.getElementById('social-bubbles');
+        CONFIG.socials.forEach(s => {
+            bubbleContainer.innerHTML += `
+                <div class="social-bubble">
+                    <a href="${s.link}" target="_blank"><i class="${s.icon}"></i></a>
+                </div>
+            `;
+        });
+
+        function updateBio() {
+            const lang = CONFIG[currentLang];
+            document.getElementById('bio-content').innerHTML = `
+                <i class="fa-solid fa-calendar-days"></i> ${lang.birth}<br>
+                <i class="fa-solid fa-graduation-cap"></i> ${lang.edu}<br>
+                <i class="fa-solid fa-envelope"></i> longt3384@gmail.com
+            `;
+            document.getElementById('btn-text').innerText = lang.btn;
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            updateBio();
+            charIdx = 0; roleIdx = 0; isDeleting = false;
+        }
+
+        function type() {
+            const roles = CONFIG[currentLang].roles;
+            const currentRole = roles[roleIdx];
+            const display = document.getElementById('typewriter');
+            if (isDeleting) display.innerText = currentRole.substring(0, charIdx--);
+            else display.innerText = currentRole.substring(0, charIdx++);
+            if (!isDeleting && charIdx > currentRole.length) { isDeleting = true; setTimeout(type, 2000); }
+            else if (isDeleting && charIdx < 0) { isDeleting = false; roleIdx = (roleIdx + 1) % roles.length; setTimeout(type, 500); }
+            else setTimeout(type, isDeleting ? 40 : 80);
+        }
+
+        function init() {
+            document.getElementById('enter-screen').classList.add('fade-out');
+            
+            document.getElementById('bg-video').play().catch(e => console.log(e));
+            
+            const scIframe = document.getElementById('sc-widget');
+            scIframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(CONFIG.musicUrl)}&auto_play=true&loop=true&show_artwork=false`;
+            
+            updateBio();
+            type();
+        }
+    </script>
+</body>
+</html>
