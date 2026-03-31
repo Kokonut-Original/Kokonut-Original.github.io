@@ -13,78 +13,76 @@
             --bg-glass: rgba(20, 20, 20, 0.55); 
             --border-glass: rgba(255, 255, 255, 0.15);
         }
-        * { 
-            margin: 0; padding: 0; box-sizing: border-box; cursor: none; 
-            user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
         ::-webkit-scrollbar { display: none; }
-        body { background: #000; color: var(--primary); font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; }
-        
+        body { background: #000; color: var(--primary); font-family: 'Outfit', sans-serif; overflow: hidden; height: 100dvh; }
         #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -4; filter: brightness(0.3); }
         #sakura-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; }
-        #drawing-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+        #drawing-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; touch-action: none; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%); z-index: -1; pointer-events: none; }
-        
         #enter-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer; transition: 1s ease; font-family: 'JetBrains Mono', monospace; letter-spacing: 5px; color: var(--accent); text-shadow: 0 0 15px var(--accent); }
         #enter-screen.fade-out { opacity: 0; pointer-events: none; transform: scale(1.1); }
-        
-        .container { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; pointer-events: none; }
-        
+        .container { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; pointer-events: none; }
         .profile-card { background: var(--bg-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border-glass); border-top: 1px solid rgba(255, 255, 255, 0.3); width: 400px; padding: 80px 40px 40px; border-radius: 20px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.9); position: relative; pointer-events: auto; margin-top: 50px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        
         .avatar-container { position: absolute; top: -55px; left: 50%; transform: translateX(-50%); z-index: 3; }
         .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; animation: pulse-avatar 2s infinite alternate; }
         @keyframes pulse-avatar { 0% { box-shadow: 0 0 10px rgba(255,255,255,0.2); } 100% { box-shadow: 0 0 25px rgba(255,255,255,0.6); } }
-        
         h1 { font-size: 22px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; font-weight: 700; }
         .typewriter-container { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 13px; min-height: 20px; margin-bottom: 20px; font-weight: bold; }
         .divider { width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); margin: 0 auto 15px auto; }
         .details { font-size: 13px; color: #ccc; line-height: 2; text-align: left; display: inline-block; }
         .details i { color: var(--accent); width: 22px; margin-right: 8px; }
-        
         .action-btn { display: inline-block; margin-top: 20px; padding: 10px 30px; background: transparent; color: var(--primary); border: 1px solid var(--accent); border-radius: 30px; font-size: 12px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; box-shadow: 0 0 10px rgba(236, 214, 8, 0.2); pointer-events: auto; }
         .action-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent); transform: translateY(-3px); }
-        
         .social-bubbles-container { width: 100%; display: flex; justify-content: center; gap: 25px; margin-top: 30px; position: relative; z-index: 5; pointer-events: auto; }
         .social-bubble { width: 55px; height: 55px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: center; align-items: center; transition: 0.3s; animation: bubble-float 4s ease-in-out infinite; }
         .social-bubble a { color: white; font-size: 24px; opacity: 0.6; text-decoration: none; pointer-events: auto; }
         .social-bubble:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255,255,255,0.1); }
         .social-bubble:hover a { opacity: 1; color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-        
         #cursor { width: 10px; height: 10px; background: rgba(168, 85, 247, 0.8); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; box-shadow: 0 0 15px rgba(168, 85, 247, 1); transition: transform 0.08s linear; }
         .lang-btn { position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px 15px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; z-index: 100; pointer-events: auto; transition: 0.3s; }
         .lang-btn:hover { background: var(--accent); color: black; border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
-        
-        .floating-stats { position: fixed; bottom: 20px; left: 20px; display: flex; gap: 15px; z-index: 100; pointer-events: auto; font-size: 12px; font-weight: bold; }
+        .floating-stats { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 15px; z-index: 100; pointer-events: auto; font-size: 12px; font-weight: bold; }
         .stat-badge { display: flex; align-items: center; gap: 8px; background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); color: #ddd; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .stat-badge i { color: var(--accent); font-size: 14px; text-shadow: 0 0 8px var(--accent); }
         .stat-badge:hover { border-color: var(--accent); background: rgba(236, 214, 8, 0.1); color: #fff; transform: translateY(-3px); }
         #like-badge { cursor: pointer; }
         .liked i { color: #ff4757 !important; text-shadow: 0 0 10px #ff4757 !important; animation: heartBeat 0.5s ease-in-out; }
         @keyframes heartBeat { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        #tv-wrapper { position: fixed; bottom: 20px; left: 20px; width: 220px; aspect-ratio: 16/9; z-index: 100; opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none; }
+        #tv-wrapper.show-tv { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        #tv-image-btn { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; border: 2px solid rgba(255,255,255,0.15); cursor: pointer; display: block; }
+        #tv-image-btn img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
+        #tv-image-btn:hover img { transform: scale(1.1); filter: brightness(0.7); }
+        .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 30px; transition: 0.3s; text-shadow: 0 0 10px #000; }
+        #tv-image-btn:hover .play-overlay { color: var(--accent); transform: translate(-50%, -50%) scale(1.2); }
+        @media (max-width: 480px) {
+            .profile-card { width: 95%; padding: 60px 20px 30px; }
+            .floating-stats { bottom: 15px; right: 10px; gap: 8px; }
+            #tv-wrapper { width: 140px; bottom: 15px; left: 10px; }
+            #cursor { display: none; }
+        }
     </style>
 </head>
 <body>
     <div id="enter-screen" onclick="init()">[ CLICK TO ENTER ]</div>
-    <iframe id="sc-widget" style="display:none;" scrolling="no" frameborder="no" src=""></iframe>
     <video id="bg-video" loop muted playsinline><source src="" type="video/mp4"></video>
     <canvas id="sakura-canvas"></canvas>
     <canvas id="drawing-canvas"></canvas>
     <div class="overlay"></div>
     <div id="cursor"></div>
-    
     <button class="lang-btn" onclick="toggleLang()">VI / EN</button>
-
     <div class="floating-stats">
-        <div class="stat-badge">
-            <i class="fa-solid fa-eye"></i><span id="view-count">--</span>
-        </div>
-        <div class="stat-badge" id="like-badge" onclick="addLike()">
-            <i class="fa-solid fa-heart" id="heart-icon"></i><span id="like-count">0</span>
-        </div>
+        <div class="stat-badge"><i class="fa-solid fa-eye"></i><span id="view-count">327</span></div>
+        <div class="stat-badge" id="like-badge" onclick="addLike()"><i class="fa-solid fa-heart" id="heart-icon"></i><span id="like-count">0</span></div>
     </div>
-
+    <div id="tv-wrapper">
+        <a id="tv-image-btn" href="https://www.youtube.com/watch?v=PSN0l8wu1GE" target="_blank">
+            <img src="tv.jpg" alt="TV">
+            <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+        </a>
+    </div>
     <div class="container">
         <div class="profile-card">
             <div class="avatar-container"><img id="avatar-img" class="avatar" src="avatar.jpg" alt="Avatar" draggable="false"></div>
@@ -97,26 +95,28 @@
         </div>
         <div class="social-bubbles-container" id="social-bubbles"></div>
     </div>
-
     <script>
         const CONFIG = {
             backgroundUrl: "https://motionbgs.com/media/9121/large-cherry-blossom-tree.960x540.mp4",
-            musicUrl: "https://soundcloud.com/lenoir-352214365/giao-h-ng-thank-wolfgang",
+            musicUrl: "music.mp3", 
             socials: [
                 { icon: "fa-brands fa-facebook", link: "https://www.facebook.com/backislayer" },
                 { icon: "fa-brands fa-instagram", link: "https://instagram.com/anhdangxuy_" },
                 { icon: "fa-brands fa-github", link: "https://github.com/Kokonut-Original" },
                 { icon: "fa-brands fa-discord", link: "https://discord.com/users/kokonut_original" }
             ],
-            vi: { edu: "Bổ Túc PTIT", birth: "03/07/2007", btn: "DỰ ÁN CỦA TÔI (CẤM ẤN)", roles: ["Kĩ sư ngôn ngữ Chatgpt & Gemini", "IELTS 9.0 (Nhưng là Listening 4.0)", "M nhìn cái chó j?", "Lương 350 triệu... tiền game"] },
-            en: { edu: "PTIT University (Hard Mode)", birth: "July 03, 2007", btn: "DON'T CLICK THIS", roles: ["Gemini Chatgpt Language Coder", "IELTS 9.0 (In my dreams)", "Master of 'Copy-Paste'", "Look at my code, not me", "Professional Ghoster"] }
+            vi: { edu: "Bổ Túc PTIT", birth: "03/07/2007", btn: "DỰ ÁN CỦA TÔI", roles: ["Kĩ sư ngôn ngữ Chatgpt & Gemini", "IELTS 9.0 (Nhưng là Listening 4.0)", "M nhìn cái chó j?", "Lương 350 triệu... tiền game"] },
+            en: { edu: "PTIT University (Hard Mode)", birth: "July 03, 2007", btn: "MY PROJECTS", roles: ["Gemini Chatgpt Language Coder", "IELTS 9.0 (In my dreams)", "Master of 'Copy-Paste'", "Look at my code, not me", "Professional Ghoster"] }
         };
+
+        const bgMusic = new Audio(CONFIG.musicUrl);
+        bgMusic.loop = true;
 
         function loadViews() {
             const username = "Kokonut-Original";
             fetch(`https://hits.dwyl.com/${username}/${username}.github.io.json`)
                 .then(res => res.json())
-                .then(data => { document.getElementById('view-count').innerText = data.score || "1.2k"; })
+                .then(data => { document.getElementById('view-count').innerText = 327 + (data.score || 0); })
                 .catch(() => { document.getElementById('view-count').innerText = "327"; });
         }
 
@@ -126,11 +126,8 @@
 
         function addLike() {
             if (!sessionStorage.getItem('liked')) {
-                likes++;
-                localStorage.setItem('kokonut_likes', likes);
-                sessionStorage.setItem('liked', 'true');
-                document.getElementById('like-count').innerText = likes;
-                document.getElementById('like-badge').classList.add('liked');
+                likes++; localStorage.setItem('kokonut_likes', likes); sessionStorage.setItem('liked', 'true');
+                document.getElementById('like-count').innerText = likes; document.getElementById('like-badge').classList.add('liked');
             }
         }
 
@@ -160,9 +157,14 @@
         let lines = []; let isDrawing = false; let currentLine = null;
         function resizeDraw() { drawCanvas.width = window.innerWidth; drawCanvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeDraw); resizeDraw();
-        window.addEventListener('mousedown', (e) => { if(e.target.closest('.profile-card') || e.target.closest('.social-bubble') || e.target.closest('.lang-btn') || e.target.closest('.floating-stats')) return; isDrawing = true; currentLine = { points: [{x:e.clientX, y:e.clientY}], ts: Date.now() }; });
-        window.addEventListener('mousemove', (e) => { document.getElementById('cursor').style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; if(!isDrawing) return; currentLine.points.push({x:e.clientX, y:e.clientY}); });
+        const stopDraw = (e) => e.target.closest('.profile-card') || e.target.closest('.social-bubble') || e.target.closest('.lang-btn') || e.target.closest('.floating-stats') || e.target.closest('#tv-wrapper');
+        window.addEventListener('mousedown', (e) => { if(stopDraw(e)) return; isDrawing = true; currentLine = { points: [{x:e.clientX, y:e.clientY}], ts: Date.now() }; });
+        window.addEventListener('mousemove', (e) => { document.getElementById('cursor').style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; if(isDrawing) currentLine.points.push({x:e.clientX, y:e.clientY}); });
         window.addEventListener('mouseup', () => { if(isDrawing) lines.push(currentLine); isDrawing = false; });
+        window.addEventListener('touchstart', (e) => { if(stopDraw(e)) return; isDrawing = true; const t = e.touches[0]; currentLine = { points: [{x:t.clientX, y:t.clientY}], ts: Date.now() }; }, {passive: false});
+        window.addEventListener('touchmove', (e) => { if(!isDrawing) return; e.preventDefault(); const t = e.touches[0]; currentLine.points.push({x:t.clientX, y:t.clientY}); }, {passive: false});
+        window.addEventListener('touchend', () => { if(isDrawing) lines.push(currentLine); isDrawing = false; });
+
         function animateDraw() {
             drawCtx.clearRect(0,0,drawCanvas.width, drawCanvas.height); const now = Date.now();
             lines = lines.filter(l => {
@@ -189,21 +191,13 @@
             else if(isDeleting && charIdx < 0) { isDeleting = false; roleIdx = (roleIdx + 1) % r.length; setTimeout(type, 500); }
             else setTimeout(type, isDeleting ? 40 : 80);
         }
-        
         function init() {
             document.getElementById('enter-screen').classList.add('fade-out');
-            
-            document.querySelector('#bg-video source').src = CONFIG.backgroundUrl;
-            document.getElementById('bg-video').load(); 
-            document.getElementById('bg-video').play().catch(e => console.log(e));
-            
-            document.getElementById('sc-widget').src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(CONFIG.musicUrl)}&auto_play=true&loop=true`;
-            
-            updateBio(); 
-            type(); 
-            loadViews();
+            const v = document.getElementById('bg-video'); v.querySelector('source').src = CONFIG.backgroundUrl; v.load(); v.play();
+            bgMusic.play().catch(() => {});
+            document.getElementById('tv-wrapper').classList.add('show-tv');
+            updateBio(); type(); loadViews();
         }
-        
         const bubbleContainer = document.getElementById('social-bubbles');
         CONFIG.socials.forEach(s => { bubbleContainer.innerHTML += `<div class="social-bubble"><a href="${s.link}" target="_blank"><i class="${s.icon}"></i></a></div>`; });
     </script>
