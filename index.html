@@ -17,7 +17,7 @@
             --border-glass: rgba(255, 255, 255, 0.15);
         }
 
-        /* Thêm user-select: none để CHỐNG BÔI ĐEN CHỮ KHI VẼ */
+
         * { 
             margin: 0; padding: 0; box-sizing: border-box; cursor: none; 
             user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
@@ -31,7 +31,7 @@
             height: 100vh;
         }
 
-        /* --- BACKGROUND LAYERS --- */
+
         #bg-video {
             position: fixed;
             top: 0; left: 0;
@@ -65,7 +65,7 @@
             pointer-events: none; 
         }
 
-        /* --- CLICK TO ENTER --- */
+
         #enter-screen {
             position: fixed;
             top: 0; left: 0;
@@ -75,7 +75,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            cursor: pointer; /* Riêng nút này vẫn có cursor mặc định trước khi vào */
+            cursor: pointer; 
             transition: 1s ease;
             font-family: 'JetBrains Mono', monospace;
             letter-spacing: 5px;
@@ -84,7 +84,7 @@
         }
         #enter-screen.fade-out { opacity: 0; pointer-events: none; transform: scale(1.1); }
 
-        /* --- MAIN CONTAINER --- */
+
         .container {
             height: 100vh;
             display: flex;
@@ -96,13 +96,13 @@
             pointer-events: none; 
         }
 
-        /* --- PROFILE CARD MỚI (GLASSMORPHISM SẮC NÉT) --- */
+
         .profile-card {
             background: var(--bg-glass);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
-            border-top: 1px solid rgba(255, 255, 255, 0.3); /* Cắt nét sáng đỉnh thẻ */
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
             width: 400px;
             padding: 80px 40px 40px; 
             border-radius: 20px; 
@@ -119,7 +119,7 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* --- AVATAR VỚI HIỆU ỨNG NHỊP THỞ (PULSE) --- */
+
         .avatar-container {
             position: absolute;
             top: -55px; 
@@ -143,7 +143,7 @@
             100% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 0 0 10px rgba(255, 255, 255, 0); }
         }
 
-        /* --- NÚT ACTION NEON --- */
+
         .action-btn {
             display: inline-block;
             margin-top: 25px;
@@ -169,7 +169,7 @@
             transform: translateY(-3px);
         }
 
-        /* --- SOCIAL BUBBLES --- */
+
         .social-bubbles-container {
             width: 100%;
             display: flex;
@@ -221,17 +221,17 @@
             color: var(--accent); opacity: 1; text-shadow: 0 0 10px var(--accent);
         }
 
-        /* --- TYPOGRAPHY & DETAILS --- */
+        
         h1 { font-size: 24px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .typewriter-container { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 14px; min-height: 20px; margin-bottom: 25px; font-weight: bold; text-shadow: 0 0 8px rgba(236, 214, 8, 0.4); }
         
-        /* Divider gradient mờ 2 đầu */
+
         .divider { width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); margin: 0 auto 20px auto; }
         
         .details { font-size: 14px; color: #ccc; line-height: 2.2; margin-bottom: 10px; text-align: left; display: inline-block; }
         .details i { color: var(--accent); width: 25px; text-align: center; margin-right: 10px; }
 
-        /* --- CUSTOM CURSOR --- */
+
         #cursor {
             width: 12px; height: 12px;
             background: rgba(168, 85, 247, 0.8);
@@ -320,7 +320,7 @@
             }
         };
 
-        // --- 1. SAKURA (HOA ANH ĐÀO NÂNG CẤP) LOGIC ---
+
         const sakuraCanvas = document.getElementById('sakura-canvas');
         const sakuraCtx = sakuraCanvas.getContext('2d');
         let petals = [];
@@ -392,7 +392,7 @@
         }
         animateSakura();
 
-        // --- 2. DRAWING LOGIC (MỰC TÍM) ---
+
         const drawCanvas = document.getElementById('drawing-canvas');
         const drawCtx = drawCanvas.getContext('2d');
         let lines = [];
@@ -451,7 +451,7 @@
         }
         animateDraw();
 
-        // --- 3. SYSTEM LOGIC ---
+
         let currentLang = 'vi';
         let roleIdx = 0;
         let charIdx = 0;
