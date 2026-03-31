@@ -118,7 +118,7 @@
             fetch(`https://hits.dwyl.com/${username}/${username}.github.io.json`)
                 .then(res => res.json())
                 .then(data => { document.getElementById('view-count').innerText = data.score || "1.2k"; })
-                .catch(() => { document.getElementById('view-count').innerText = "69"; });
+                .catch(() => { document.getElementById('view-count').innerText = "327"; });
         }
 
         let likes = parseInt(localStorage.getItem('kokonut_likes')) || 157;
