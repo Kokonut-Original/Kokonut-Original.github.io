@@ -18,9 +18,7 @@ var DISCORD_ID = "1076862941837676594";
 
 /* src: a music file you own (in music/). Leave it empty to use the Spotify player for the track id below. */
 /* cover: an image shown in the middle of the spinning disc, e.g. "assets/cover.jpg" (leave empty for the plain pink label) */
-var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "music/song.mp3", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 318, cover: "music/cover.jpg" };
-
-/* subject names only: no rooms, times or lecturers */
+var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "music/song.mp3", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 83, cover: "music/cover.jpg" };/* subject names only: no rooms, times or lecturers */
 var SCHEDULE = {
   1:{vi:["Kỹ năng làm việc nhóm"],en:["Teamwork Skills"]},
   2:{vi:["Xác suất thống kê","Kiến trúc máy tính và hệ điều hành"],en:["Probability & Statistics","Computer Architecture & OS"]},
