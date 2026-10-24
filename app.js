@@ -19,6 +19,8 @@ var DISCORD_ID = "1076862941837676594";
 /* GoatCounter account (tranduclongg.goatcounter.com). The visit count in the footer only shows
    after ticking "Allow adding visitor counts on your website" in GoatCounter settings. */
 var GOATCOUNTER = "tranduclongg";
+/* number added on top of the real GoatCounter count shown on the page (0 = real number only) */
+var VIEW_BONUS = 0;
 
 /* src: a music file you own (in music/). Leave it empty to use the Spotify player for the track id below. */
 /* cover: an image shown in the middle of the spinning disc, e.g. "assets/cover.jpg" (leave empty for the plain pink label) */
@@ -59,7 +61,7 @@ var ABOUT = {
 
 var STR = {
   vi:{h1a:"Chào, mình là Long.",h1b:'Đang học ở <span class="u">cao đẳng bưu điện</span> PTIT.',
-      lead:'Hiện đã có <b class="vc">…</b> người ghé trang.',visitsSome:"kha khá",
+      lead:'Đã có <b class="vc">…</b> người ghé trang.',visitsSome:"kha khá",
       status:"Hiện đang tắc đường ở Hà Nội",listening:"Đang nghe",sample:"số liệu mẫu",
       schedTitle:"Lịch học hôm nay",noteTitle:"Việc tuần này",t1:"Ngủ full time",t2:"Đi gym",t3:"Học bài",t4:"Học tiếng Trung",
       lazy:"Không thể tick do rất lười đi tập =)))",
@@ -411,7 +413,7 @@ renderers.push(renderVisits);
 if (GOATCOUNTER && window.fetch && !/^(localhost|127\.)/.test(location.hostname)){
   fetch("https://"+GOATCOUNTER+".goatcounter.com/counter/TOTAL.json")
     .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(d){ VISITS = d && d.count ? String(d.count).replace(/\D/g, "") : false; renderVisits(); })
+    .then(function(d){ var n = d && d.count ? parseInt(String(d.count).replace(/\D/g, ""), 10) : NaN; VISITS = isNaN(n) ? false : String(n + (VIEW_BONUS||0)); renderVisits(); })
     .catch(function(){ VISITS = false; renderVisits(); });
 } else VISITS = false;
 
