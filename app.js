@@ -28,18 +28,6 @@ var SCHEDULE = {
 var EDU = { start:"2018-09-01", ptit:"2025-09-01", grad:"2030-03-01" };
 
 var PROJECTS = [
-  { hidden:true, file:"wazuh-lab/", color:"var(--card-a)",
-    meta:{vi:"Dự án nhóm · môn Cơ sở an toàn thông tin · 2026", en:"Team project · Information Security Basics · 2026"},
-    title:{vi:"Lab phát hiện xâm nhập Wazuh + Suricata", en:"Intrusion detection lab with Wazuh + Suricata"},
-    desc:{vi:"Dựng lại và mô phỏng 5 kịch bản tấn công trong môi trường Linux + Docker, rồi xem hệ thống giám sát có bắt được không.",
-          en:"Rebuilt and simulated 5 attack scenarios in a Linux + Docker environment, then checked whether the monitoring stack caught them."},
-    steps:{vi:[["Kịch bản","5 kịch bản tấn công, dựng trong Docker trên Linux."],["Phát hiện","Wazuh gom log từ các máy, Suricata soi lưu lượng mạng."],["Alert","Gắn rule, chạy tấn công, bắt alert trên dashboard."],["Báo cáo","Tổng hợp alert và viết báo cáo cho nhóm."]],
-           en:[["Scenarios","5 attack scenarios, built in Docker on Linux."],["Detection","Wazuh collects host logs, Suricata watches network traffic."],["Alerts","Wire up rules, run the attacks, catch alerts on the dashboard."],["Report","Collect the alerts and write the team report."]]},
-    role:{vi:"<b>Phần của mình:</b> cài Wazuh và Suricata, gắn rule, chạy tấn công, bắt alert, viết báo cáo.",
-          en:"<b>My part:</b> installed Wazuh and Suricata, wired up the rules, ran the attacks, captured alerts and wrote the report."},
-    tags:["Wazuh","Suricata","Docker","Linux"],
-    links:[{label:{vi:"Repo trên GitHub",en:"Repo on GitHub"}, href:"https://github.com/Kokonut-Original/csattt-ids"}],
-    shot:{vi:"Ảnh chụp dashboard Wazuh<br>thêm sau", en:"Wazuh dashboard screenshot<br>coming later"} },
   { file:"orb-clash/", color:"var(--card-b)",
     meta:{vi:"Dự án cá nhân · làm cho vui · 2026", en:"Side project · for fun · 2026"},
     title:{vi:"Orb Clash", en:"Orb Clash"},
@@ -77,7 +65,7 @@ var STR = {
       left:function(y,m){ return "Còn khoảng "+y+" năm "+m+" tháng"; },
       side:["Cấp 2","Cấp 3","Đại học","Tốt nghiệp","Đi làm"],
       log:[["THCS Việt Nam – Angiêri","Cấp 2"],["THPT Trần Hưng Đạo – Thanh Xuân","Cấp 3 · Hà Nội"],["PTIT · Học viện Công nghệ Bưu chính Viễn thông","An toàn thông tin · năm "],["Tốt nghiệp","dự kiến 2030"],["Đi làm","chưa biết ở đâu"]],
-      projH:"Mấy thứ mình đã làm.",projSub:"Cuộn để lật sang hồ sơ tiếp theo.",
+      projH:"Mấy thứ mình đã làm.",
       skillH:"Đang học, chưa giỏi.",skillSub:"Thanh nào chưa đầy là còn đang cày.",
       ielts:"IELTS · Tiếng Anh",ieltsD:"Tiếng Anh, đã có chứng chỉ.",hsk:"HSK 3 · đang học",hskD:"Tiếng Trung, đang ôn để thi.",
       selfScore:"Phần trăm là tự chấm, và chấm hơi gắt.",
@@ -105,7 +93,7 @@ var STR = {
       left:function(y,m){ return "About "+y+" yr "+m+" mo left"; },
       side:["Middle school","High school","University","Graduation","Work"],
       log:[["Việt Nam – Angiêri Secondary School","Middle school"],["Trần Hưng Đạo – Thanh Xuân High School","High school · Hanoi"],["PTIT · Posts and Telecommunications Institute of Technology","Information Security · year "],["Graduation","expected 2030"],["Start working","somewhere, TBD"]],
-      projH:"Things I've made.",projSub:"Scroll to flip to the next file.",
+      projH:"Things I've made.",
       skillH:"Still learning.",skillSub:"Any bar that isn't full is still in progress.",
       ielts:"IELTS · English",ieltsD:"English, certified.",hsk:"HSK 3 · in progress",hskD:"Chinese, studying for the exam.",
       selfScore:"Self-graded, and graded strictly.",
@@ -518,13 +506,12 @@ var FS = {type:"dir", c:{
   "ky-nang.txt":{type:"file", text:SKILLS.map(function(g){ return g.items.map(function(x){ var n = Math.round(x[1]/5); return (x[0]+"          ").slice(0,11)+"["+"█".repeat(n)+"░".repeat(20-n)+"] "+x[1]+"%"; }).join("\n"); }).join("\n")+"\n\nNgôn ngữ: IELTS 6.5 · HSK 3 (đang học)"},
   "lien-he.txt":{type:"file", text:"email    contact@tranduclong.id.vn\nemail    longt3384@gmail.com\ngithub   github.com/Kokonut-Original\ndiscord  kokonut_original\nfb       facebook.com/backislayer\nig       instagram.com/anhdangxuy_"},
   "du-an":{type:"dir", c:{
-    "wazuh-lab.md":{type:"file", text:"# Lab phát hiện xâm nhập Wazuh + Suricata (dự án nhóm)\nMô phỏng 5 kịch bản tấn công trên Linux + Docker.\nPhần của mình: cài Wazuh và Suricata, gắn rule, chạy tấn công,\nbắt alert và viết báo cáo.\n→ gõ: open wazuh"},
     "orb-clash.md":{type:"file", text:"# Orb Clash\nGame đấu bóng vật lý offline với bot (HTML canvas + JS thuần).\nBóng càng hiếm kỹ năng càng dị.\n→ gõ: open orb"}
   }},
   "todo.txt":{type:"file", text:"[x] ngủ full time\n[ ] đi gym   <- không tick được, lười\n[ ] học bài\n[ ] học tiếng Trung"},
   ".secret":{type:"file", text:"Tìm được file ẩn rồi đấy. Dân bảo mật có khác.\nflag{sakura_khong_phai_cookie}"}
 }};
-var LINKS = {github:"https://github.com/Kokonut-Original", orb:"https://github.com/Kokonut-Original/orb-clash", wazuh:"https://github.com/Kokonut-Original/csattt-ids",
+var LINKS = {github:"https://github.com/Kokonut-Original", orb:"https://github.com/Kokonut-Original/orb-clash",
   spotify:"https://open.spotify.com/user/b25kq5xy99t3igprvzmsh23uw", valorant:"https://tracker.gg/valorant/profile/riot/C%C3%A0%20Ph%C3%AA%20S%E1%BB%AFa%20D%E1%BB%ABa%23nut/overview"};
 var GOTO = ["top","hoc-van","du-an","ky-nang","playground","about","lien-he"];
 var CMDS = ["help","ls","cd","pwd","cat","tree","clear","whoami","echo","history","date","uname","neofetch","open","goto","sudo","rm","nmap","man","exit"];
@@ -560,8 +547,8 @@ function makeShell(o){
     var a = line.split(/\s+/), cmd = a[0], args = a.slice(1), vi = lang!=="en", r;
     switch(cmd){
       case "help": print(vi ?
-        'Lệnh có sẵn:\n  <span class="ok">ls</span> [-a]      xem file          <span class="ok">cd</span> &lt;thư mục&gt;   đổi thư mục\n  <span class="ok">cat</span> &lt;file&gt;    đọc file          <span class="ok">tree</span>           cây thư mục\n  <span class="ok">whoami</span>        mình là ai        <span class="ok">neofetch</span>       thông tin máy\n  <span class="ok">open</span> &lt;tên&gt;    github · orb · wazuh · spotify · valorant\n  <span class="ok">goto</span> &lt;phần&gt;   hoc-van · du-an · ky-nang · playground · about · lien-he\n  <span class="ok">history</span> · <span class="ok">date</span> · <span class="ok">uname</span> · <span class="ok">echo</span> · <span class="ok">clear</span> · <span class="ok">exit</span>\n<span class="d">Mẹo: Tab để tự hoàn thành, ↑ ↓ để xem lệnh cũ, Ctrl+L để xóa màn hình.</span>' :
-        'Commands:\n  <span class="ok">ls</span> [-a]   <span class="ok">cd</span> &lt;dir&gt;   <span class="ok">cat</span> &lt;file&gt;   <span class="ok">tree</span>   <span class="ok">whoami</span>   <span class="ok">neofetch</span>\n  <span class="ok">open</span> &lt;name&gt;   github · orb · wazuh · spotify · valorant\n  <span class="ok">goto</span> &lt;part&gt;   hoc-van · du-an · ky-nang · playground · about · lien-he\n  <span class="ok">history</span> · <span class="ok">date</span> · <span class="ok">uname</span> · <span class="ok">echo</span> · <span class="ok">clear</span> · <span class="ok">exit</span>\n<span class="d">Tip: Tab completes, ↑ ↓ for history, Ctrl+L clears.</span>'); break;
+        'Lệnh có sẵn:\n  <span class="ok">ls</span> [-a]      xem file          <span class="ok">cd</span> &lt;thư mục&gt;   đổi thư mục\n  <span class="ok">cat</span> &lt;file&gt;    đọc file          <span class="ok">tree</span>           cây thư mục\n  <span class="ok">whoami</span>        mình là ai        <span class="ok">neofetch</span>       thông tin máy\n  <span class="ok">open</span> &lt;tên&gt;    github · orb · spotify · valorant\n  <span class="ok">goto</span> &lt;phần&gt;   hoc-van · du-an · ky-nang · playground · about · lien-he\n  <span class="ok">history</span> · <span class="ok">date</span> · <span class="ok">uname</span> · <span class="ok">echo</span> · <span class="ok">clear</span> · <span class="ok">exit</span>\n<span class="d">Mẹo: Tab để tự hoàn thành, ↑ ↓ để xem lệnh cũ, Ctrl+L để xóa màn hình.</span>' :
+        'Commands:\n  <span class="ok">ls</span> [-a]   <span class="ok">cd</span> &lt;dir&gt;   <span class="ok">cat</span> &lt;file&gt;   <span class="ok">tree</span>   <span class="ok">whoami</span>   <span class="ok">neofetch</span>\n  <span class="ok">open</span> &lt;name&gt;   github · orb · spotify · valorant\n  <span class="ok">goto</span> &lt;part&gt;   hoc-van · du-an · ky-nang · playground · about · lien-he\n  <span class="ok">history</span> · <span class="ok">date</span> · <span class="ok">uname</span> · <span class="ok">echo</span> · <span class="ok">clear</span> · <span class="ok">exit</span>\n<span class="d">Tip: Tab completes, ↑ ↓ for history, Ctrl+L clears.</span>'); break;
       case "ls":
         var all = args.some(function(x){ return /^-[a-z]*a/.test(x); }), target = args.filter(function(x){ return x.charAt(0)!=="-"; })[0];
         r = resolve(target);
@@ -607,12 +594,12 @@ function makeShell(o){
       case "open":
         var key = (args[0]||"").toLowerCase();
         if (LINKS[key]) print('→ <a href="'+LINKS[key]+'" target="_blank" rel="noopener">'+esc(LINKS[key])+'</a>  <span class="d">'+(vi?"(bấm để mở)":"(click to open)")+'</span>');
-        else print('<span class="e">open: '+(vi?"không biết":"unknown")+' "'+esc(args[0]||"")+'". '+(vi?"Thử":"Try")+': github, orb, wazuh, spotify, valorant</span>'); break;
+        else print('<span class="e">open: '+(vi?"không biết":"unknown")+' "'+esc(args[0]||"")+'". '+(vi?"Thử":"Try")+': github, orb, spotify, valorant</span>'); break;
       case "goto":
         var g = (args[0]||"").toLowerCase();
         if (GOTO.indexOf(g) > -1){ print('<span class="d">→ '+g+'</span>'); if (o.onGoto) o.onGoto(); goSection(g); }
         else print('<span class="e">goto: '+(vi?"thử":"try")+': '+GOTO.slice(1).join(", ")+'</span>'); break;
-      case "sudo": print('<span class="e">long is not in the sudoers file. This incident will be reported.</span>\n<span class="d">'+(vi?"(báo cáo cho chính mình, vì mình cũng là SOC)":"(reported to myself, I'm the SOC too)")+'</span>'); break;
+      case "sudo": print('<span class="e">long is not in the sudoers file. This incident will be reported.</span>'); break;
       case "rm": print(args.join(" ").indexOf("-rf")>-1 ? '<span class="e">rm: '+(vi?"thao tác bị chặn. Đã ghi log sự kiện #":"blocked. Event logged as #")+(1000+Math.floor(Math.random()*9000))+'.</span>' : '<span class="e">rm: permission denied</span>'); break;
       case "nmap": print('Starting Nmap ('+(vi?"giả lập":"simulated")+')\nNmap scan report for tranduclong.id.vn\nPORT    STATE  SERVICE\n22/tcp  <span class="e">closed</span> ssh\n80/tcp  <span class="ok">open</span>   http\n443/tcp <span class="ok">open</span>   https\n<span class="d">'+(vi?"Đùa thôi, đây là trang tĩnh trên GitHub Pages.":"Just kidding, this is a static page on GitHub Pages.")+'</span>'); break;
       case "man": print(vi?'Không có trang man nào cả. Thử <span class="ok">help</span>.':'No manual entry. Try <span class="ok">help</span>.'); break;
