@@ -18,7 +18,7 @@ var DISCORD_ID = "1076862941837676594";
 
 /* src: a music file you own (in music/). Leave it empty to use the Spotify player for the track id below. */
 /* cover: an image shown in the middle of the spinning disc, e.g. "assets/cover.jpg" (leave empty for the plain pink label) */
-var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 318, cover: "" };
+var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "music/song.mp3", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 318, cover: "music/cover.jpg" };
 
 /* subject names only: no rooms, times or lecturers */
 var SCHEDULE = {
@@ -348,9 +348,13 @@ function spring(o){
 /* =====================================================================
    music
    ===================================================================== */
-var audio = new Audio(); audio.preload = "metadata"; if (MUSIC.src) audio.src = MUSIC.src;
+/* drop music/song.mp3 (and music/cover.jpg) into the repo and the widget plays it; without the file it falls back to Spotify */
+var audio = new Audio(), hasFile = false; audio.preload = "metadata";
+audio.addEventListener("loadedmetadata", function(){ hasFile = true; });
+audio.addEventListener("error", function(){ hasFile = false; });
+if (MUSIC.src) audio.src = MUSIC.src;
 $("spArtist").textContent = MUSIC.artist || "";
-if (MUSIC.cover){ $("spLabel").classList.add("has-img"); $("spLabel").style.setProperty("--cover", 'url("'+MUSIC.cover+'")'); }
+if (MUSIC.cover){ var coverImg = new Image(); coverImg.onload = function(){ $("spLabel").classList.add("has-img"); $("spLabel").style.setProperty("--cover", 'url("'+MUSIC.cover+'")'); }; coverImg.src = MUSIC.cover; }
 $("spTitle").textContent = MUSIC.title;
 var PLAY = '<path d="M7 4.5v15l13-7.5z" fill="currentColor"/>', PAUSE = '<path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/>';
 function fmt(s){ s = Math.max(0, Math.floor(s||0)); return Math.floor(s/60)+":"+pad(s%60); }
@@ -370,7 +374,11 @@ function embedSpotify(){
   w.classList.add("embed");
   w.innerHTML = '<iframe title="Spotify: '+esc(MUSIC.title)+'" src="https://open.spotify.com/embed/track/'+MUSIC.spotify+'?utm_source=generator&theme=0" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
 }
-$("spPlay").addEventListener("click", function(){ if (!MUSIC.src){ embedSpotify(); return; } if (audio.paused) audio.play().catch(function(){ toast(t("blocked")); }); else audio.pause(); });
+$("spPlay").addEventListener("click", function(){
+  if (!MUSIC.src){ embedSpotify(); return; }
+  if (!audio.paused){ audio.pause(); return; }
+  audio.play().catch(function(){ if (hasFile) toast(t("blocked")); else embedSpotify(); });
+});
 audio.addEventListener("play", function(){ setPlaying(true); });
 audio.addEventListener("pause", function(){ setPlaying(false); });
 audio.addEventListener("ended", function(){ audio.currentTime = 0; setPlaying(false); tickSpot(); });
