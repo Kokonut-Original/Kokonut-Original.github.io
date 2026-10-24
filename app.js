@@ -59,7 +59,7 @@ var ABOUT = {
 
 var STR = {
   vi:{h1a:"Chào, mình là Long.",h1b:'Đang học ở <span class="u">cao đẳng bưu điện</span> PTIT.',
-      lead:"Rất biết sợ và không muốn bị ăn đòn. Đang làm ở Côn Ti Bát Nin.",
+      lead:'Hiện đã có <b class="vc">…</b> người ghé trang.',visitsSome:"kha khá",
       status:"Hiện đang tắc đường ở Hà Nội",listening:"Đang nghe",sample:"số liệu mẫu",
       schedTitle:"Lịch học hôm nay",noteTitle:"Việc tuần này",t1:"Ngủ full time",t2:"Đi gym",t3:"Học bài",t4:"Học tiếng Trung",
       lazy:"Không thể tick do rất lười đi tập =)))",
@@ -78,7 +78,7 @@ var STR = {
       valDesc:"Rank thì xem trên tracker, đừng hỏi.",openTracker:"Tracker ↗",
       teTitle:"about-me.txt — Đã sửa",tabThen:"Trước đây",tabNow:"Bây giờ",tabNext:"Sắp tới",
       contactH:"Nói chuyện với mình.",contactSub:"Email là nhanh nhất. Discord cũng được, bấm là copy tên.",
-      mainMail:"Email chính",altMail:"Email phụ",copy:"Copy",visits:"lượt ghé",madeWith:"Viết bằng HTML, CSS, JS thuần. Không dùng cookie.",
+      mainMail:"Email chính",altMail:"Email phụ",copy:"Copy",madeWith:"Viết bằng HTML, CSS, JS thuần. Không dùng cookie.",
       session:"đã ở đây ",home:"Trang chính",toDark:"Chuyển sang nền tối",toLight:"Chuyển sang nền sáng",
       dc:{online:"Đang online",idle:"Đang treo máy",dnd:"Đừng làm phiền",offline:"Đang offline",none:"Chưa kết nối"},
       dcPlay:"Đang chơi",dcListen:"Đang nghe",dcMin:" phút",dcHr:" giờ",dcIdleLine:"Không làm gì cả, chắc đang ngủ full time",dcSetup:"Thêm Discord ID trong app.js để hiện trạng thái",
@@ -87,7 +87,7 @@ var STR = {
       copied:"Đã copy",play:"Phát",pause:"Tạm dừng",blocked:"Trình duyệt chặn phát nhạc, thử bấm lại",
       wx:{sun:"Nắng",cloud:"Nhiều mây",rain:"Có mưa"}},
   en:{h1a:"Hi, I'm Long.",h1b:'Studying at the <span class="u">PTIT post office</span> college.',
-      lead:"Easily scared and would rather not get beaten up. Currently working at Côn Ti Bát Nin.",
+      lead:'So far <b class="vc">…</b> people have dropped by.',visitsSome:"quite a few",
       status:"Currently stuck in Hanoi traffic",listening:"Now playing",sample:"sample data",
       schedTitle:"Today's classes",noteTitle:"This week",t1:"Sleep full time",t2:"Go to the gym",t3:"Study",t4:"Learn Chinese",
       lazy:"Can't tick this, way too lazy to work out =)))",
@@ -106,7 +106,7 @@ var STR = {
       valDesc:"The rank is on the tracker. Don't ask.",openTracker:"Tracker ↗",
       teTitle:"about-me.txt — Edited",tabThen:"Before",tabNow:"Now",tabNext:"Next",
       contactH:"Say hi.",contactSub:"Email is fastest. Discord works too, tap to copy the name.",
-      mainMail:"Main email",altMail:"Backup email",copy:"Copy",visits:"visits",madeWith:"Plain HTML, CSS and JS. No cookies.",
+      mainMail:"Main email",altMail:"Backup email",copy:"Copy",madeWith:"Plain HTML, CSS and JS. No cookies.",
       session:"been here ",home:"Home",toDark:"Switch to dark",toLight:"Switch to light",
       dc:{online:"Online",idle:"Idle",dnd:"Do not disturb",offline:"Offline",none:"Not connected"},
       dcPlay:"Playing",dcListen:"Listening to",dcMin:" min",dcHr:" h",dcIdleLine:"Doing nothing, probably sleeping full time",dcSetup:"Add a Discord ID in app.js to show live status",
@@ -403,16 +403,17 @@ function renderEdu(){
 }
 renderers.push(renderEdu);
 
-/* visit counter (GoatCounter public count; hidden if not enabled or blocked) */
+/* visit counter in the hero line (GoatCounter public count).
+   null = still loading ("…"), false = not available (blocked or not enabled) → "kha khá" */
 var VISITS = null;
-function renderVisits(){ var el = $("visits"); if (!el) return; if (VISITS===null){ el.hidden = true; return; } el.textContent = VISITS+" "+t("visits"); el.hidden = false; }
+function renderVisits(){ $$(".vc").forEach(function(el){ el.textContent = VISITS===null ? "…" : VISITS===false ? t("visitsSome") : VISITS.replace(/\B(?=(\d{3})+$)/g, lang==="en" ? "," : "."); }); }
 renderers.push(renderVisits);
 if (GOATCOUNTER && window.fetch && !/^(localhost|127\.)/.test(location.hostname)){
   fetch("https://"+GOATCOUNTER+".goatcounter.com/counter/TOTAL.json")
     .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(d){ if (d && d.count){ VISITS = String(d.count).replace(/[\s\u00a0\u202f,]/g, "."); renderVisits(); } })
-    .catch(function(){});
-}
+    .then(function(d){ VISITS = d && d.count ? String(d.count).replace(/\D/g, "") : false; renderVisits(); })
+    .catch(function(){ VISITS = false; renderVisits(); });
+} else VISITS = false;
 
 /* =====================================================================
    projects: stacked folders
