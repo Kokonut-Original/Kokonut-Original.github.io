@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trần Đức Long</title>
+<meta name="description" content="Trần Đức Long (Not Kokonut), sinh viên An toàn thông tin ở PTIT.">
+<meta property="og:title" content="Trần Đức Long">
+<meta property="og:description" content="Trần Đức Long (Not Kokonut), sinh viên An toàn thông tin ở PTIT.">
+<meta name="theme-color" content="#F6F4F5">
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wall" aria-hidden="true"></div>
+<canvas id="branches" aria-hidden="true"></canvas>
+<canvas id="petals" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+
+<header class="menubar">
+  <div class="mb-left">
+    <a class="mono-mark" href="#top" id="homeLink" aria-label="Về đầu trang">TĐL</a>
+    <span class="mb-name">Trần Đức Long</span>
+    <span class="mb-sub">Not Kokonut</span>
+    <span class="mb-sec" id="mbSec"></span>
+  </div>
+  <div class="mb-right">
+    <button type="button" class="theme-btn" id="themeBtn" aria-pressed="false"></button>
+    <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
+      <button type="button" id="langVi" aria-pressed="true">VI</button>
+      <button type="button" id="langEn" aria-pressed="false">EN</button>
+      <button type="button" id="langBn" aria-pressed="false" title="Tiếng Bát Nin">BÁT NIN</button>
+    </div>
+    <span id="mbClock"></span>
+  </div>
+</header>
+
+<main>
+<!-- ============ 1. DESKTOP ============ -->
+<section class="desk" id="top" data-stop data-name="desk">
+<div class="page" id="pg1">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1><span data-i18n="h1a">Chào, mình là Long.</span><br><span data-i18n="h1b">Đang học ở <span class="u">cao đẳng bưu điện</span> PTIT.</span></h1>
+      <p data-i18n="lead">Rất biết sợ và không muốn bị ăn đòn. Đang làm ở Côn Ti Bát Nin.</p>
+      <div class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="status">Hiện đang tắc đường ở Hà Nội</span></div>
+    </div>
+  </div>
+
+  <div class="widget" id="w-ava"><img src="assets/avatar.jpg" alt="Ảnh Trần Đức Long" width="480" height="480"></div>
+
+  <div class="widget" id="w-cal" aria-label="Lịch">
+    <div class="cal-day" id="calDay"></div>
+    <div class="cal-num" id="calNum"></div>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+
+  <div class="widget" id="w-spot" aria-label="Trình phát nhạc">
+    <div class="vinyl" aria-hidden="true"><div class="disc" id="spDisc"></div></div>
+    <div class="sp-body">
+      <div class="sp-top">
+        <span class="sp-label" data-i18n="listening">Đang nghe</span>
+        <span class="sp-time" id="spTime">0:00 / 1:23</span>
+      </div>
+      <div class="sp-title" id="spTitle"></div>
+      <div class="sp-artist" id="spArtist"></div>
+      <div class="sp-bar" id="spSeek" role="slider" tabindex="0" aria-label="Tua bài hát" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="spBar"></i></div>
+      <div class="sp-foot">
+        <a class="sp-user" href="https://open.spotify.com/user/b25kq5xy99t3igprvzmsh23uw" target="_blank" rel="noopener" aria-label="Spotify của Trần Đức Long"><svg class="sp-logo" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spotify"/></svg>Trần Đức Long</a>
+        <button class="sp-play" type="button" id="spPlay" aria-label="Phát"><svg id="spIcon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="apps a4">
+    <button class="app" type="button" data-open="hoc-van"><span class="app-ic ai-edu"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.5v4c0 1.5 2.7 3 6 3s6-1.5 6-3v-4M22 9.5v5"/></svg></span><span class="app-lb" data-i18n="nEdu">Học vấn</span></button>
+    <button class="app" type="button" data-open="du-an"><span class="app-ic ai-proj"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span class="app-lb" data-i18n="nProj">Dự án</span></button>
+    <button class="app" type="button" data-open="ky-nang"><span class="app-ic ai-skill"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 20v-8M10 20V5M15 20v-6M20 20V9"/></svg></span><span class="app-lb" data-i18n="nSkill">Kỹ năng</span></button>
+    <button class="app" type="button" data-open="playground"><span class="app-ic ai-play"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="10" r="5"/><circle cx="16.5" cy="16" r="3.5"/></svg></span><span class="app-lb">Playground</span></button>
+  </div>
+</div>
+<div class="page" id="pg2">
+  <div class="widget" id="w-dc" aria-label="Discord">
+    <div class="dc-top">
+      <span class="dc-ava"><img id="dcAva" alt="" width="44" height="44" hidden><span id="dcInit" aria-hidden="true">TĐL</span><i class="dc-dot off" id="dcDot"></i></span>
+      <div class="dc-who"><b id="dcName">Not Kokonut</b><span>@kokonut_original</span></div>
+      <svg class="dc-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-dc"/></svg>
+    </div>
+    <div class="dc-act"><span class="dc-st" id="dcStatus"></span><span class="dc-line" id="dcLine"></span></div>
+  </div>
+  <div class="widget" id="w-weather" aria-label="Thời tiết Hà Nội">
+    <div class="wx-top">
+      <div><div class="wx-city">Hà Nội</div><div class="wx-now" id="wxNow">26°</div></div>
+      <div class="wx-cond"><span id="wxCond"></span><br><span class="sample" id="wxSample" data-i18n="sample">số liệu mẫu</span></div>
+    </div>
+    <div class="wx-days" id="wxDays"></div>
+  </div>
+
+  <div class="widget" id="w-sched" aria-label="Lịch học hôm nay">
+    <div class="sc-row"><span class="w-label" data-i18n="schedTitle">Lịch học hôm nay</span><span class="w-label" id="scDay"></span></div>
+    <div class="sc-main" id="scMain"></div>
+    <div class="sc-next" id="scNext"></div>
+  </div>
+
+  <div class="widget" id="w-note" aria-label="Giấy note">
+    <div class="note-h" data-i18n="noteTitle">Việc tuần này</div>
+    <ul class="note-list">
+      <li><label><input type="checkbox" id="t1" checked><span data-i18n="t1">Ngủ full time</span></label></li>
+      <li><label><input type="checkbox" id="t2" class="holo"><span data-i18n="t2">Đi gym</span></label></li>
+      <li><label><input type="checkbox" id="t3"><span data-i18n="t3">Học bài</span></label></li>
+      <li><label><input type="checkbox" id="t4"><span data-i18n="t4">Học tiếng Trung</span></label></li>
+    </ul>
+  </div>
+
+  <div class="widget" id="w-clock" role="img" aria-label="Đồng hồ Hà Nội">
+    <svg id="clockSvg" viewBox="0 0 140 140" aria-hidden="true">
+      <g id="ticks"></g>
+      <text x="70" y="44" text-anchor="middle">HÀ NỘI</text>
+      <line id="hH" class="hand" x1="70" y1="70" x2="70" y2="40" stroke-width="4"/>
+      <line id="hM" class="hand" x1="70" y1="70" x2="70" y2="24" stroke-width="3"/>
+      <line id="hS" class="hand sec" x1="70" y1="80" x2="70" y2="18" stroke-width="1.5"/>
+      <circle cx="70" cy="70" r="3.5" fill="var(--accent)"/>
+    </svg>
+  </div>
+
+  <div class="apps a2">
+    <a class="app" href="https://www.facebook.com/backislayer" target="_blank" rel="noopener"><span class="app-ic c-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-fb"/></svg></span><span class="app-lb">Facebook</span></a>
+    <a class="app" href="https://www.instagram.com/anhdangxuy_" target="_blank" rel="noopener"><span class="app-ic c-ig"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg></span><span class="app-lb">Instagram</span></a>
+    <button class="app" type="button" data-copy="kokonut_original"><span class="app-ic c-dc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-dc"/></svg></span><span class="app-lb">Discord</span></button>
+    <a class="app" href="https://tracker.gg/valorant/profile/riot/C%C3%A0%20Ph%C3%AA%20S%E1%BB%AFa%20D%E1%BB%ABa%23nut/overview" target="_blank" rel="noopener"><span class="app-ic c-val"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-val"/></svg></span><span class="app-lb">Valorant</span></a>
+  </div>
+  <div class="apps a4">
+    <button class="app" type="button" data-open="about"><span class="app-ic ai-about"><svg viewBox="0 0 24 24" fill="none" stroke="#8E8A93" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z"/><path d="M10 12h5M10 15h5M10 9h2"/></svg></span><span class="app-lb">about-me</span></button>
+    <button class="app" type="button" data-open="lien-he"><span class="app-ic ai-contact"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="9" r="3.5"/><path d="M5 19.5c1.2-3.2 3.8-4.8 7-4.8s5.8 1.6 7 4.8"/></svg></span><span class="app-lb" data-i18n="nContact">Liên hệ</span></button>
+  </div>
+</div>
+  <nav class="folders" aria-label="Các mục">
+    <button class="fold" type="button" data-go="hoc-van"><svg viewBox="0 0 62 52" aria-hidden="true"><use href="#folder"/></svg><span data-i18n="nEdu">Học vấn</span></button>
+    <button class="fold" type="button" data-go="du-an"><svg viewBox="0 0 62 52" aria-hidden="true"><use href="#folder"/></svg><span data-i18n="nProj">Dự án</span></button>
+    <button class="fold" type="button" data-go="ky-nang"><svg viewBox="0 0 62 52" aria-hidden="true"><use href="#folder"/></svg><span data-i18n="nSkill">Kỹ năng</span></button>
+    <button class="fold" type="button" data-go="playground"><svg viewBox="0 0 62 52" aria-hidden="true"><use href="#folder"/></svg><span>Playground</span></button>
+    <button class="fold" type="button" data-go="about"><svg viewBox="0 0 62 52" aria-hidden="true"><use href="#txtfile"/></svg><span>about-me.txt</span></button>
+  </nav>
+</section>
+
+<!-- ============ 2. EDUCATION: installer ============ -->
+<section class="sec" id="hoc-van" data-stop data-name="nEdu" aria-labelledby="eduH">
+  <div class="sec-head">
+    <div><span class="kicker" data-i18n="nEdu">Học vấn</span><h2 id="eduH" data-i18n="eduH">Đang cài đặt.</h2><p class="sec-sub" data-i18n="eduSub"></p></div>
+  </div>
+  <div class="mwin inst">
+    <div class="mwin-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="mwin-title" data-i18n="instTitle">Cài đặt Trần Đức Long</span></div>
+    <div class="inst-body">
+      <aside class="inst-side"><ol id="instSide"></ol></aside>
+      <div class="inst-main">
+        <h3 data-i18n="instNow">Đang cài đặt: Đại học</h3>
+        <div class="inst-meta"><span id="instLeft"></span><span id="instPct"></span></div>
+        <div class="pbar" id="instBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i></i></div>
+        <ul class="log" id="instLog"></ul>
+        <div class="inst-foot">
+          <button class="btn" type="button" data-step="-1" data-i18n="back">Quay lại</button>
+          <button class="btn primary" type="button" data-step="1" data-i18n="cont">Tiếp tục</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. PROJECTS: stacked folders ============ -->
+<section class="sec" id="du-an" data-stop data-name="nProj" aria-labelledby="projH">
+  <div class="proj-stage">
+    <div class="sec-head">
+      <div><span class="kicker" data-i18n="nProj">Dự án</span><h2 id="projH" data-i18n="projH">Mấy thứ mình đã làm.</h2><p class="sec-sub" data-i18n="projSub"></p></div>
+      <div class="counter" id="projCount" aria-live="polite"></div>
+    </div>
+    <div class="proj-deck" id="projDeck"></div>
+  </div>
+</section>
+
+<!-- ============ 4. SKILLS ============ -->
+<section class="sec" id="ky-nang" data-stop data-name="nSkill" aria-labelledby="skillH">
+  <div class="sec-head">
+    <div><span class="kicker" data-i18n="nSkill">Kỹ năng</span><h2 id="skillH" data-i18n="skillH">Đang học, chưa giỏi.</h2><p class="sec-sub" data-i18n="skillSub"></p></div>
+  </div>
+  <div class="skills">
+    <div class="panel" id="skillPanel"></div>
+    <div class="langs">
+      <div class="panel lcard"><div class="lbig">6.5</div><div><div class="lname" data-i18n="ielts">IELTS · Tiếng Anh</div><div class="ldesc" data-i18n="ieltsD"></div></div></div>
+      <div class="panel lcard"><div class="lbig zh" lang="zh">学</div><div><div class="lname" data-i18n="hsk">HSK 3 · đang học</div><div class="ldesc" data-i18n="hskD"></div></div></div>
+    </div>
+  </div>
+  <p class="footnote" data-i18n="selfScore"></p>
+</section>
+
+<!-- ============ 5. PLAYGROUND ============ -->
+<section class="sec" id="playground" data-stop data-name="nPlay" aria-labelledby="playH">
+  <div class="sec-head">
+    <div><span class="kicker">Playground</span><h2 id="playH" data-i18n="playH">Chỗ để nghịch.</h2><p class="sec-sub" data-i18n="playSub"></p></div>
+  </div>
+  <div class="play">
+    <div class="mwin twin">
+      <div class="mwin-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="mwin-title">long@tranduclong — zsh</span></div>
+      <div class="term" id="term2">
+        <div id="tout2"></div>
+        <div class="line-in"><label for="tin2" class="p" id="tprompt2">long@tranduclong:~$</label><input id="tin2" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="panel"><h3 data-i18n="tryTitle">Thử gõ</h3><p data-i18n="tryDesc"></p><div class="cmds" id="cmdChips"></div></div>
+      <a class="panel lnk" href="https://github.com/Kokonut-Original/orb-clash" target="_blank" rel="noopener">
+        <span class="ico orb-ico" aria-hidden="true"></span>
+        <div><h3>Orb Clash</h3><p data-i18n="orbDesc"></p></div>
+        <span class="go" data-i18n="viewRepo">Xem repo ↗</span>
+      </a>
+      <a class="panel lnk" href="https://tracker.gg/valorant/profile/riot/C%C3%A0%20Ph%C3%AA%20S%E1%BB%AFa%20D%E1%BB%ABa%23nut/overview" target="_blank" rel="noopener">
+        <span class="ico c-val" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-val"/></svg></span>
+        <div><h3>Valorant</h3><p data-i18n="valDesc"></p></div>
+        <span class="go" data-i18n="openTracker">Tracker ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ABOUT ============ -->
+<section class="sec" id="about" data-stop data-name="nAbout" aria-label="about-me.txt">
+  <div class="mwin textedit">
+    <div class="mwin-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="mwin-title" data-i18n="teTitle">about-me.txt — Đã sửa</span></div>
+    <div class="te-tools">
+      <div class="seg" role="tablist" aria-label="about-me">
+        <button type="button" role="tab" id="tab-then" aria-controls="tePaper" aria-selected="false" data-tab="then" data-i18n="tabThen">Trước đây</button>
+        <button type="button" role="tab" id="tab-now" aria-controls="tePaper" aria-selected="true" data-tab="now" data-i18n="tabNow">Bây giờ</button>
+        <button type="button" role="tab" id="tab-next" aria-controls="tePaper" aria-selected="false" data-tab="next" data-i18n="tabNext">Sắp tới</button>
+      </div>
+    </div>
+    <div class="te-paper" id="tePaper" role="tabpanel" aria-labelledby="tab-now"></div>
+  </div>
+</section>
+
+<!-- ============ 7. CONTACT ============ -->
+<section class="sec" id="lien-he" data-stop data-name="nContact" aria-labelledby="contactH">
+  <div class="sec-head">
+    <div><span class="kicker" data-i18n="nContact">Liên hệ</span><h2 id="contactH" data-i18n="contactH">Nói chuyện với mình.</h2><p class="sec-sub" data-i18n="contactSub"></p></div>
+  </div>
+  <div class="contact">
+    <div class="mails">
+      <div class="mail"><div><div class="lbl" data-i18n="mainMail">Email chính</div><div class="addr">contact@tranduclong.id.vn</div></div><button class="btn" type="button" data-copy="contact@tranduclong.id.vn" data-i18n="copy">Copy</button></div>
+      <div class="mail"><div><div class="lbl" data-i18n="altMail">Email phụ</div><div class="addr">longt3384@gmail.com</div></div><button class="btn" type="button" data-copy="longt3384@gmail.com" data-i18n="copy">Copy</button></div>
+    </div>
+    <div class="socials">
+      <a class="soc" href="https://github.com/Kokonut-Original" target="_blank" rel="noopener"><span class="ic c-gh"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-gh"/></svg></span><span><span class="t1">GitHub</span><br><span class="t2">Kokonut-Original</span></span></a>
+      <button class="soc" type="button" data-copy="kokonut_original"><span class="ic c-dc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-dc"/></svg></span><span><span class="t1">Discord</span><br><span class="t2">kokonut_original</span></span></button>
+      <a class="soc" href="https://www.facebook.com/backislayer" target="_blank" rel="noopener"><span class="ic c-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-fb"/></svg></span><span><span class="t1">Facebook</span><br><span class="t2">backislayer</span></span></a>
+      <a class="soc" href="https://www.instagram.com/anhdangxuy_" target="_blank" rel="noopener"><span class="ic c-ig"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg></span><span><span class="t1">Instagram</span><br><span class="t2">anhdangxuy_</span></span></a>
+      <a class="soc" href="https://open.spotify.com/user/b25kq5xy99t3igprvzmsh23uw" target="_blank" rel="noopener"><span class="ic c-sp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spotify"/></svg></span><span><span class="t1">Spotify</span><br><span class="t2">Trần Đức Long</span></span></a>
+      <a class="soc" href="https://tracker.gg/valorant/profile/riot/C%C3%A0%20Ph%C3%AA%20S%E1%BB%AFa%20D%E1%BB%ABa%23nut/overview" target="_blank" rel="noopener"><span class="ic c-val"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-val"/></svg></span><span><span class="t1">Valorant</span><br><span class="t2">Cà Phê Sữa Dừa#nut</span></span></a>
+    </div>
+  </div>
+  <footer class="foot">
+    <span>© 2026 Trần Đức Long · Not Kokonut</span>
+    <span data-i18n="madeWith"></span>
+    <span class="mono" id="lastLogin"></span>
+  </footer>
+</section>
+</main>
+
+<nav class="dots" id="dots" aria-label="Các phần của trang"></nav>
+
+<div class="dock-wrap">
+  <nav class="dock" id="dock" aria-label="Dock">
+    <a class="dk" href="https://github.com/Kokonut-Original" target="_blank" rel="noopener" aria-label="GitHub"><span class="ic c-gh"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-gh"/></svg></span><span class="tip">GitHub</span></a>
+    <a class="dk" href="mailto:contact@tranduclong.id.vn" id="dkMail" aria-label="Email: contact@tranduclong.id.vn"><span class="ic c-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></svg></span><span class="tip">contact@tranduclong.id.vn</span></a>
+    <a class="dk dk-x" href="https://www.facebook.com/backislayer" target="_blank" rel="noopener" aria-label="Facebook"><span class="ic c-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-fb"/></svg></span><span class="tip">Facebook</span></a>
+    <a class="dk dk-x" href="https://www.instagram.com/anhdangxuy_" target="_blank" rel="noopener" aria-label="Instagram"><span class="ic c-ig"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg></span><span class="tip">Instagram</span></a>
+    <button class="dk dk-x" type="button" data-copy="kokonut_original" aria-label="Discord: kokonut_original, bấm để copy"><span class="ic c-dc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-dc"/></svg></span><span class="tip">kokonut_original</span></button>
+    <a class="dk" href="https://open.spotify.com/user/b25kq5xy99t3igprvzmsh23uw" target="_blank" rel="noopener" aria-label="Spotify"><span class="ic c-sp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spotify"/></svg></span><span class="tip">Spotify</span></a>
+    <a class="dk dk-x" href="https://tracker.gg/valorant/profile/riot/C%C3%A0%20Ph%C3%AA%20S%E1%BB%AFa%20D%E1%BB%ABa%23nut/overview" target="_blank" rel="noopener" aria-label="Valorant Tracker"><span class="ic c-val"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-val"/></svg></span><span class="tip">Valorant Tracker</span></a>
+    <span class="sep" aria-hidden="true"></span>
+    <button class="dk" type="button" id="dkTerm" aria-label="Mở Terminal"><span class="ic c-term"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 8 4 4-4 4M12.5 16H18"/></svg></span><span class="tip">Terminal</span><span class="run" aria-hidden="true"></span></button>
+  </nav>
+</div>
+
+<div class="pdots" id="pdots" aria-hidden="true"><i class="on"></i><i></i></div>
+<div class="appbar" id="appbar" hidden>
+  <button type="button" class="app-back" id="appBack"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2 2 10l8 8"/></svg><span data-i18n="home">Trang chính</span></button>
+  <span class="app-title" id="appTitle"></span>
+</div>
+<button class="homebar" id="homebar" type="button" aria-label="Về trang chính" hidden><i></i></button>
+
+<div class="win" id="win" role="dialog" aria-label="Terminal" hidden>
+  <div class="win-bar" id="winBar">
+    <button class="tl tl-c" type="button" id="tlClose" aria-label="Đóng"><svg viewBox="0 0 8 8" aria-hidden="true"><path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="currentColor" stroke-width="1.3"/></svg></button>
+    <button class="tl tl-m" type="button" id="tlMin" aria-label="Thu nhỏ"><svg viewBox="0 0 8 8" aria-hidden="true"><path d="M1.2 4h5.6" stroke="currentColor" stroke-width="1.3"/></svg></button>
+    <button class="tl tl-z" type="button" id="tlZoom" aria-label="Phóng to"><svg viewBox="0 0 8 8" aria-hidden="true"><path d="M2 2h3.2L2 5.2zM6 6H2.8L6 2.8z" fill="currentColor"/></svg></button>
+    <div class="win-title">long@tranduclong — zsh</div>
+  </div>
+  <div class="term" id="term1">
+    <div id="tout1"></div>
+    <div class="line-in"><label for="tin1" class="p" id="tprompt1">long@tranduclong:~$</label><input id="tin1" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="fg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC8FF"/><stop offset="1" stop-color="#3D9BF0"/></linearGradient>
+    <linearGradient id="fg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9AD6FF"/><stop offset="1" stop-color="#5AB0F7"/></linearGradient>
+    <symbol id="folder" viewBox="0 0 62 52"><path d="M4 8a4 4 0 0 1 4-4h14.5a4 4 0 0 1 3.2 1.6L28.3 9H54a4 4 0 0 1 4 4v31a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" fill="url(#fg1)"/><path d="M4 16a4 4 0 0 1 4-4h46a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" fill="url(#fg2)"/><path d="M4 16a4 4 0 0 1 4-4h46a4 4 0 0 1 4 4" stroke="rgba(255,255,255,.55)" fill="none"/></symbol>
+    <symbol id="txtfile" viewBox="0 0 62 52"><path d="M17 2h20l11 11v35a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#fff" stroke="#D5D2D6"/><path d="M37 2v9a2 2 0 0 0 2 2h9" fill="#EDEBEE" stroke="#D5D2D6"/><path d="M21 22h20M21 27h20M21 32h16M21 37h18" stroke="#B8B4BB" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8.5V6.8c0-.8.5-1 .9-1h2.4V2.2L14 2.2c-3.6 0-4.4 2.6-4.4 4.3v2H7.5v3.7h2.1V22H14v-9.8h3l.4-3.7H14z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="#fff" stroke-width="1.9"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></symbol>
+    <symbol id="i-dc" viewBox="0 0 24 24"><path d="M19.3 5.3A16.7 16.7 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.7 16.7 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.7a16.9 16.9 0 0 0 5.1 2.6l1.1-1.7c-.6-.2-1.2-.5-1.7-.8l.4-.3a12 12 0 0 0 10.8 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.7a16.9 16.9 0 0 0 5.1-2.6c.4-4.3-.7-8-3-11.4zM8.7 14.4c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1zm6.6 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1z"/></symbol>
+    <symbol id="i-spotify" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="currentColor"/><path d="M6.5 9.3c3.8-1.1 8-.8 11 .9M7.2 12.4c3.2-.9 6.6-.6 9.2.8M7.8 15.3c2.6-.7 5.2-.5 7.4.6" stroke="#121212" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-val" viewBox="0 0 24 24"><path d="M2.5 5.5 13 18.6h-4.6L2.5 11.2zM21.5 5.5v6l-4.4 5.4h-4.6z"/></symbol>
+  </defs>
+</svg>
+
+<script src="app.js"></script>
+</body>
+</html>
