@@ -20,7 +20,7 @@ var DISCORD_ID = "1076862941837676594";
    after ticking "Allow adding visitor counts on your website" in GoatCounter settings. */
 var GOATCOUNTER = "tranduclongg";
 /* number added on top of the real GoatCounter count shown on the page (0 = real number only) */
-var VIEW_BONUS = 0;
+var VIEW_BONUS = 673;
 
 /* src: a music file you own (in music/). Leave it empty to use the Spotify player for the track id below. */
 /* cover: an image shown in the middle of the spinning disc, e.g. "assets/cover.jpg" (leave empty for the plain pink label) */
