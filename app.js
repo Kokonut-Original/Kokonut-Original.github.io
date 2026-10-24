@@ -60,11 +60,11 @@ var STR = {
       schedTitle:"Lịch học hôm nay",noteTitle:"Việc tuần này",t1:"Ngủ full time",t2:"Đi gym",t3:"Học bài",t4:"Học tiếng Trung",
       lazy:"Không thể tick do rất lười đi tập =)))",
       desk:"Desktop",nEdu:"Học vấn",nProj:"Dự án",nSkill:"Kỹ năng",nPlay:"Playground",nAbout:"about-me.txt",nContact:"Liên hệ",
-      eduH:"Đang cài đặt.",eduSub:"Từ Angiêri tới PTIT. Còn vài bước nữa là cài xong.",
+      eduH:"Đang cài đặt.",eduSub:"Chẳng mấy chốc mà cưới vợ có con. Còn vài bước nữa là cài xong.",
       instTitle:"Cài đặt Trần Đức Long",instNow:"Đang cài đặt: Đại học",back:"Quay lại",cont:"Tiếp tục",
       left:function(y,m){ return "Còn khoảng "+y+" năm "+m+" tháng"; },
-      side:["Cấp 2","Cấp 3","Đại học","Tốt nghiệp","Đi làm"],
-      log:[["THCS Việt Nam – Angiêri","Cấp 2"],["THPT Trần Hưng Đạo – Thanh Xuân","Cấp 3 · Hà Nội"],["PTIT · Học viện Công nghệ Bưu chính Viễn thông","An toàn thông tin · năm "],["Tốt nghiệp","dự kiến 2030"],["Đi làm","chưa biết ở đâu"]],
+      side:["Cấp 2","Cấp 3","Đại học","Tốt nghiệp","Đi làm","Cưới vợ"],
+      log:[["THCS Việt Nam – Angiêri","Cấp 2"],["THPT Trần Hưng Đạo – Thanh Xuân","Cấp 3 · Hà Nội"],["PTIT · Học viện Công nghệ Bưu chính Viễn thông","An toàn thông tin · năm "],["Tốt nghiệp","dự kiến 2030"],["Đi làm","chưa biết ở đâu"],["Cưới vợ rồi đẻ con","chẳng mấy chốc"]],
       projH:"Mấy thứ mình đã làm.",
       skillH:"Đang học, chưa giỏi.",skillSub:"Thanh nào chưa đầy là còn đang cày.",
       ielts:"IELTS · Tiếng Anh",ieltsD:"Tiếng Anh, đã có chứng chỉ.",hsk:"HSK 3 · đang học",hskD:"Tiếng Trung, đang ôn để thi.",
@@ -88,11 +88,11 @@ var STR = {
       schedTitle:"Today's classes",noteTitle:"This week",t1:"Sleep full time",t2:"Go to the gym",t3:"Study",t4:"Learn Chinese",
       lazy:"Can't tick this, way too lazy to work out =)))",
       desk:"Desktop",nEdu:"Education",nProj:"Projects",nSkill:"Skills",nPlay:"Playground",nAbout:"about-me.txt",nContact:"Contact",
-      eduH:"Installing.",eduSub:"From Angiêri to PTIT. A few more steps until it's done.",
+      eduH:"Installing.",eduSub:"Before you know it: married with kids. A few more steps until it's done.",
       instTitle:"Install Trần Đức Long",instNow:"Now installing: University",back:"Back",cont:"Continue",
       left:function(y,m){ return "About "+y+" yr "+m+" mo left"; },
-      side:["Middle school","High school","University","Graduation","Work"],
-      log:[["Việt Nam – Angiêri Secondary School","Middle school"],["Trần Hưng Đạo – Thanh Xuân High School","High school · Hanoi"],["PTIT · Posts and Telecommunications Institute of Technology","Information Security · year "],["Graduation","expected 2030"],["Start working","somewhere, TBD"]],
+      side:["Middle school","High school","University","Graduation","Work","Marriage"],
+      log:[["Việt Nam – Angiêri Secondary School","Middle school"],["Trần Hưng Đạo – Thanh Xuân High School","High school · Hanoi"],["PTIT · Posts and Telecommunications Institute of Technology","Information Security · year "],["Graduation","expected 2030"],["Start working","somewhere, TBD"],["Get married, have kids","sooner than you think"]],
       projH:"Things I've made.",
       skillH:"Still learning.",skillSub:"Any bar that isn't full is still in progress.",
       ielts:"IELTS · English",ieltsD:"English, certified.",hsk:"HSK 3 · in progress",hskD:"Chinese, studying for the exam.",
@@ -387,10 +387,10 @@ function renderEdu(){
   $("instLeft").textContent = graduated ? "" : t("left")(Math.floor(months/12), months%12);
   $("instPct").textContent = Math.round(pct)+"%"; $("instPct").setAttribute("data-v", Math.round(pct));
   var bar = $("instBar"); bar.style.setProperty("--p", pct.toFixed(1)+"%"); bar.setAttribute("aria-valuenow", Math.round(pct)); bar.setAttribute("aria-label", t("instNow"));
-  var states = ["done","done", graduated?"done":"active", graduated?"done":"todo", graduated?"active":"todo"];
+  var states = ["done","done", graduated?"done":"active", graduated?"done":"todo", graduated?"active":"todo","todo"];
   var ICON = {done:'<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>', active:"", todo:""};
   $("instSide").innerHTML = t("side").map(function(n,i){ return '<li class="'+states[i]+'"'+(states[i]==="active"?' aria-current="step"':'')+'><span class="st">'+ICON[states[i]]+'</span>'+n+'</li>'; }).join("");
-  var yrs = ["2018–2022","2022–2025","2025–2030","2030","—"];
+  var yrs = ["2018–2022","2022–2025","2025–2030","2030","—","—"];
   $("instLog").innerHTML = t("log").map(function(r,i){
     var sub = r[1] + (i===2 ? year : "");
     var right = yrs[i] + (i===2 && !graduated ? '<span class="mini" aria-hidden="true"><i style="--p:'+ptPct.toFixed(1)+'%"></i></span>' : "");
@@ -502,7 +502,7 @@ $$(".seg [role=tab]").forEach(function(b, i, all){
    ===================================================================== */
 var FS = {type:"dir", c:{
   "about.txt":{type:"file", text:"Trần Đức Long (aka Not Kokonut)\nSinh viên năm 2, An toàn thông tin, PTIT.\nRất biết sợ và không muốn bị ăn đòn.\nĐang làm ở Côn Ti Bát Nin.\nHiện đang tắc đường ở Hà Nội."},
-  "hoc-van.txt":{type:"file", text:"[✓] THCS Việt Nam – Angiêri          2018–2022\n[✓] THPT Trần Hưng Đạo – Thanh Xuân    2022–2025\n[~] PTIT · An toàn thông tin           2025–2030\n[ ] Tốt nghiệp\n[ ] Đi làm"},
+  "hoc-van.txt":{type:"file", text:"[✓] THCS Việt Nam – Angiêri          2018–2022\n[✓] THPT Trần Hưng Đạo – Thanh Xuân    2022–2025\n[~] PTIT · An toàn thông tin           2025–2030\n[ ] Tốt nghiệp\n[ ] Đi làm\n[ ] Cưới vợ rồi đẻ con"},
   "ky-nang.txt":{type:"file", text:SKILLS.map(function(g){ return g.items.map(function(x){ var n = Math.round(x[1]/5); return (x[0]+"          ").slice(0,11)+"["+"█".repeat(n)+"░".repeat(20-n)+"] "+x[1]+"%"; }).join("\n"); }).join("\n")+"\n\nNgôn ngữ: IELTS 6.5 · HSK 3 (đang học)"},
   "lien-he.txt":{type:"file", text:"email    contact@tranduclong.id.vn\nemail    longt3384@gmail.com\ngithub   github.com/Kokonut-Original\ndiscord  kokonut_original\nfb       facebook.com/backislayer\nig       instagram.com/anhdangxuy_"},
   "du-an":{type:"dir", c:{
