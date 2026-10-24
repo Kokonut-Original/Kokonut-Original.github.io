@@ -16,6 +16,10 @@ function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&
    and join the Lanyard Discord server once so Lanyard can see your status. */
 var DISCORD_ID = "1076862941837676594";
 
+/* GoatCounter account (tranduclongg.goatcounter.com). The visit count in the footer only shows
+   after ticking "Allow adding visitor counts on your website" in GoatCounter settings. */
+var GOATCOUNTER = "tranduclongg";
+
 /* src: a music file you own (in music/). Leave it empty to use the Spotify player for the track id below. */
 /* cover: an image shown in the middle of the spinning disc, e.g. "assets/cover.jpg" (leave empty for the plain pink label) */
 var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "music/song.mp3", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 83, cover: "music/cover.jpg" };/* subject names only: no rooms, times or lecturers */
@@ -74,7 +78,7 @@ var STR = {
       valDesc:"Rank thì xem trên tracker, đừng hỏi.",openTracker:"Tracker ↗",
       teTitle:"about-me.txt — Đã sửa",tabThen:"Trước đây",tabNow:"Bây giờ",tabNext:"Sắp tới",
       contactH:"Nói chuyện với mình.",contactSub:"Email là nhanh nhất. Discord cũng được, bấm là copy tên.",
-      mainMail:"Email chính",altMail:"Email phụ",copy:"Copy",madeWith:"Viết bằng HTML, CSS, JS thuần. Không dùng cookie.",
+      mainMail:"Email chính",altMail:"Email phụ",copy:"Copy",visits:"lượt ghé",madeWith:"Viết bằng HTML, CSS, JS thuần. Không dùng cookie.",
       session:"đã ở đây ",home:"Trang chính",toDark:"Chuyển sang nền tối",toLight:"Chuyển sang nền sáng",
       dc:{online:"Đang online",idle:"Đang treo máy",dnd:"Đừng làm phiền",offline:"Đang offline",none:"Chưa kết nối"},
       dcPlay:"Đang chơi",dcListen:"Đang nghe",dcMin:" phút",dcHr:" giờ",dcIdleLine:"Không làm gì cả, chắc đang ngủ full time",dcSetup:"Thêm Discord ID trong app.js để hiện trạng thái",
@@ -102,7 +106,7 @@ var STR = {
       valDesc:"The rank is on the tracker. Don't ask.",openTracker:"Tracker ↗",
       teTitle:"about-me.txt — Edited",tabThen:"Before",tabNow:"Now",tabNext:"Next",
       contactH:"Say hi.",contactSub:"Email is fastest. Discord works too, tap to copy the name.",
-      mainMail:"Main email",altMail:"Backup email",copy:"Copy",madeWith:"Plain HTML, CSS and JS. No cookies.",
+      mainMail:"Main email",altMail:"Backup email",copy:"Copy",visits:"visits",madeWith:"Plain HTML, CSS and JS. No cookies.",
       session:"been here ",home:"Home",toDark:"Switch to dark",toLight:"Switch to light",
       dc:{online:"Online",idle:"Idle",dnd:"Do not disturb",offline:"Offline",none:"Not connected"},
       dcPlay:"Playing",dcListen:"Listening to",dcMin:" min",dcHr:" h",dcIdleLine:"Doing nothing, probably sleeping full time",dcSetup:"Add a Discord ID in app.js to show live status",
@@ -398,6 +402,17 @@ function renderEdu(){
   }).join("");
 }
 renderers.push(renderEdu);
+
+/* visit counter (GoatCounter public count; hidden if not enabled or blocked) */
+var VISITS = null;
+function renderVisits(){ var el = $("visits"); if (!el) return; if (VISITS===null){ el.hidden = true; return; } el.textContent = VISITS+" "+t("visits"); el.hidden = false; }
+renderers.push(renderVisits);
+if (GOATCOUNTER && window.fetch && !/^(localhost|127\.)/.test(location.hostname)){
+  fetch("https://"+GOATCOUNTER+".goatcounter.com/counter/TOTAL.json")
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){ if (d && d.count){ VISITS = String(d.count).replace(/[\s\u00a0\u202f,]/g, "."); renderVisits(); } })
+    .catch(function(){});
+}
 
 /* =====================================================================
    projects: stacked folders
