@@ -17,7 +17,8 @@ function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&
 var DISCORD_ID = "1076862941837676594";
 
 /* src: a music file you own (in music/). Leave it empty to use the Spotify player for the track id below. */
-var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 318 };
+/* cover: an image shown in the middle of the spinning disc, e.g. "assets/cover.jpg" (leave empty for the plain pink label) */
+var MUSIC = { title: "Nếu Như Ta Chẳng Còn", artist: "RPT MCK, A$AP Ướt Mi", src: "", spotify: "6BnPsHZv1jPbPAsQsm0s5b", dur: 318, cover: "" };
 
 /* subject names only: no rooms, times or lecturers */
 var SCHEDULE = {
@@ -349,6 +350,7 @@ function spring(o){
    ===================================================================== */
 var audio = new Audio(); audio.preload = "metadata"; if (MUSIC.src) audio.src = MUSIC.src;
 $("spArtist").textContent = MUSIC.artist || "";
+if (MUSIC.cover){ $("spLabel").classList.add("has-img"); $("spLabel").style.setProperty("--cover", 'url("'+MUSIC.cover+'")'); }
 $("spTitle").textContent = MUSIC.title;
 var PLAY = '<path d="M7 4.5v15l13-7.5z" fill="currentColor"/>', PAUSE = '<path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/>';
 function fmt(s){ s = Math.max(0, Math.floor(s||0)); return Math.floor(s/60)+":"+pad(s%60); }

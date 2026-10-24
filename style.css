@@ -105,7 +105,9 @@ body.away #branches{opacity:.55}
 .vinyl{width:112px;height:112px;border-radius:12px;background:#1f1d1f;display:grid;place-items:center;overflow:hidden}
 .disc{width:96px;height:96px;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#0d0d0d 0 2px,#1b1b1b 2px 3px);display:grid;place-items:center;animation:spin 6s linear infinite;animation-play-state:paused}
 .disc.playing{animation-play-state:running}
-.disc::after{content:"";width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,#121212 0 3px,#F3A6BC 3.5px 100%)}
+.disc-label{position:relative;width:36%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#121212 0 3px,#F3A6BC 3.5px 100%)}
+.disc-label.has-img{width:58%;background:var(--cover) center/cover no-repeat;box-shadow:0 0 0 2px rgba(255,255,255,.08)}
+.disc-label.has-img::after{content:"";position:absolute;inset:0;margin:auto;width:12%;height:12%;border-radius:50%;background:#121212;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .sp-body{display:flex;flex-direction:column;min-width:0}
 .sp-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
