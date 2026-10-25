@@ -42,7 +42,8 @@ var PROJECTS = [
     feats:{vi:["Nhiều loại bóng, bóng càng hiếm thì kỹ năng càng dị.","Bot không chọn trùng bóng với bạn.","Đang tính làm thêm chế độ giải đấu qua mạng LAN."],
            en:["Lots of ball types; the rarer the ball, the weirder its skill.","The bot never picks the same ball as you.","Planning a LAN tournament mode next."]},
     tags:["JavaScript","Canvas","Game"],
-    links:[{label:{vi:"Repo trên GitHub",en:"Repo on GitHub"}, href:"https://github.com/Kokonut-Original/orb-clash"}],
+    links:[{label:{vi:"Chơi ngay",en:"Play now"}, href:"/orbclash/", icon:"i-play"},
+           {label:{vi:"Repo trên GitHub",en:"Repo on GitHub"}, href:"https://github.com/Kokonut-Original/orb-clash"}],
     gallery:[{src:"assets/orb-1.jpg", w:1400, h:908, alt:{vi:"Một trận Orb Clash với bot",en:"An Orb Clash match against the bot"}},
              {src:"assets/orb-2.jpg", w:1400, h:675, alt:{vi:"Hợp thể ra bóng thần thoại Abyss",en:"Fusing into the mythic ball Abyss"}},
              {src:"assets/orb-3.jpg", w:1400, h:664, alt:{vi:"Mở được 5 quả bóng mới",en:"Unlocking 5 new balls"}}] }
@@ -76,7 +77,7 @@ var STR = {
       ielts:"IELTS · Tiếng Anh",ieltsD:"Tiếng Anh, đã có chứng chỉ.",hsk:"HSK 3 · đang học",hskD:"Tiếng Trung, đang ôn để thi.",
       selfScore:"Phần trăm là tự chấm, và chấm hơi gắt.",
       playH:"Chỗ để nghịch.",playSub:"Terminal này gõ được thật. Bắt đầu bằng help, hoặc bấm một lệnh bên cạnh.",
-      tryTitle:"Thử gõ",tryDesc:"Bấm để chạy luôn. Có một file ẩn ở đâu đó.",orbDesc:"Game đấu bóng vật lý với bot.",viewRepo:"Xem repo ↗",
+      tryTitle:"Thử gõ",tryDesc:"Bấm để chạy luôn. Có một file ẩn ở đâu đó.",orbDesc:"Game đấu bóng vật lý với bot.",viewRepo:"Chơi thử ↗",
       valDesc:"Rank thì xem trên tracker, đừng hỏi.",openTracker:"Tracker ↗",
       teTitle:"about-me.txt — Đã sửa",tabThen:"Trước đây",tabNow:"Bây giờ",tabNext:"Sắp tới",
       contactH:"Nói chuyện với mình.",contactSub:"Email là nhanh nhất. Discord cũng được, bấm là copy tên.",
@@ -104,7 +105,7 @@ var STR = {
       ielts:"IELTS · English",ieltsD:"English, certified.",hsk:"HSK 3 · in progress",hskD:"Chinese, studying for the exam.",
       selfScore:"Self-graded, and graded strictly.",
       playH:"Playground.",playSub:"This terminal really works. Start with help, or tap a command on the side.",
-      tryTitle:"Try these",tryDesc:"Tap to run. There's a hidden file somewhere.",orbDesc:"Physics ball duels against a bot.",viewRepo:"View repo ↗",
+      tryTitle:"Try these",tryDesc:"Tap to run. There's a hidden file somewhere.",orbDesc:"Physics ball duels against a bot.",viewRepo:"Play ↗",
       valDesc:"The rank is on the tracker. Don't ask.",openTracker:"Tracker ↗",
       teTitle:"about-me.txt — Edited",tabThen:"Before",tabNow:"Now",tabNext:"Next",
       contactH:"Say hi.",contactSub:"Email is fastest. Discord works too, tap to copy the name.",
@@ -442,7 +443,7 @@ function renderProjects(){
         '<p class="pc-desc">'+L(p.desc)+'</p>'+ mid +
         (p.role ? '<p class="role">'+L(p.role)+'</p>' : "")+
         '<div class="tags">'+p.tags.map(function(x){ return '<span class="chip">'+x+'</span>'; }).join("")+'</div>'+
-        '<div class="pc-links">'+p.links.map(function(l,j){ return '<a class="btn'+(j===0?' primary':'')+'" href="'+l.href+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-gh"/></svg>'+L(l.label)+'</a>'; }).join("")+'</div>'+
+        '<div class="pc-links">'+p.links.map(function(l,j){ return '<a class="btn'+(j===0?' primary':'')+'" href="'+l.href+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#'+(l.icon||"i-gh")+'"/></svg>'+L(l.label)+'</a>'; }).join("")+'</div>'+
       '</div>'+right+'</div>'+
     '</article>';
   }).join("");
@@ -529,7 +530,7 @@ var FS = {type:"dir", c:{
   "todo.txt":{type:"file", text:"[x] ngủ full time\n[ ] đi gym   <- không tick được, lười\n[ ] học bài\n[ ] học tiếng Trung"},
   ".secret":{type:"file", text:"Tìm được file ẩn rồi đấy. Dân bảo mật có khác.\nflag{sakura_khong_phai_cookie}"}
 }};
-var LINKS = {github:"https://github.com/Kokonut-Original", orb:"https://github.com/Kokonut-Original/orb-clash",
+var LINKS = {github:"https://github.com/Kokonut-Original", orb:"https://tranduclong.id.vn/orbclash/", orbrepo:"https://github.com/Kokonut-Original/orb-clash",
   spotify:"https://open.spotify.com/user/b25kq5xy99t3igprvzmsh23uw", valorant:"https://tracker.gg/valorant/profile/riot/C%C3%A0%20Ph%C3%AA%20S%E1%BB%AFa%20D%E1%BB%ABa%23nut/overview"};
 var GOTO = ["top","hoc-van","du-an","ky-nang","playground","about","lien-he"];
 var CMDS = ["help","ls","cd","pwd","cat","tree","clear","whoami","echo","history","date","uname","neofetch","open","goto","sudo","rm","nmap","man","exit"];
