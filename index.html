@@ -53,10 +53,12 @@
 
   <div class="widget" id="w-ava"><img src="assets/avatar.jpg" alt="Ảnh Trần Đức Long" width="480" height="480"></div>
 
-  <div class="widget" id="w-cal" aria-label="Lịch">
-    <div class="cal-day" id="calDay"></div>
-    <div class="cal-num" id="calNum"></div>
-    <div class="cal-grid" id="calGrid"></div>
+  <div class="widget" id="w-games" aria-label="Games">
+    <div class="gm-top"><span class="w-label">Games</span><span class="gm-n">1</span></div>
+    <div class="gm-grid">
+      <a class="gm-tile gm-orb" href="/orbclash/" target="_blank" rel="noopener" aria-label="Chơi Orb Clash"><img src="assets/orb-1.jpg" alt="" loading="lazy"><span class="gm-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-play"/></svg></span><span class="gm-name">Orb Clash</span></a>
+      <div class="gm-tile gm-soon"><span class="gm-q" aria-hidden="true">?</span><span class="gm-name" data-i18n="gSoon">Sắp có</span></div>
+    </div>
   </div>
 
   <div class="widget" id="w-spot" aria-label="Trình phát nhạc">
@@ -84,6 +86,12 @@
   </div>
 </div>
 <div class="page" id="pg2">
+  <div class="widget" id="w-cal" aria-label="Lịch">
+    <div class="cal-day" id="calDay"></div>
+    <div class="cal-num" id="calNum"></div>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+
   <div class="widget" id="w-dc" aria-label="Discord">
     <div class="dc-top">
       <span class="dc-ava"><img id="dcAva" alt="" width="44" height="44" hidden><span id="dcInit" aria-hidden="true">TĐL</span><i class="dc-dot off" id="dcDot"></i></span>

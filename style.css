@@ -184,6 +184,26 @@ body.away #branches{opacity:.55}
 .dc-st{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--fg-3)}
 .dc-line{font-size:13.5px;font-weight:600;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 @media (min-width:901px) and (max-width:1179px){ #w-dc{display:none} }
+
+/* games widget: top row, right of Discord; takes Discord's slot on narrower screens */
+#w-games{top:66px;left:1062px;width:min(340px,calc(100vw - 1222px));height:168px;padding:14px;display:flex;flex-direction:column;gap:10px}
+@media (min-width:901px) and (max-width:1399px){ #w-games{left:756px;width:290px} #w-dc{display:none} }
+.gm-top{display:flex;align-items:center;justify-content:space-between}
+.gm-n{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:1px 8px}
+.gm-grid{flex:1;display:grid;grid-template-columns:1.6fr 1fr;gap:8px;min-height:0}
+.gm-tile{position:relative;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px;text-decoration:none;min-width:0}
+.gm-orb{color:#fff;background:#1b1420}
+.gm-orb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.9,.3,1)}
+.gm-orb::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.7))}
+.gm-orb:hover img{transform:scale(1.07)}
+.gm-orb .gm-name{position:relative;z-index:1}
+.gm-play{position:absolute;z-index:1;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.2,.9,.3,1.4)}
+.gm-orb:hover .gm-play{transform:scale(1.15)}
+.gm-play svg{width:12px;height:12px;margin-left:1px}
+.gm-name{font-size:13px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gm-soon{border:1.5px dashed rgba(var(--ink),.22);color:var(--fg-3);align-items:center;justify-content:center;gap:4px;text-align:center}
+.gm-q{font-size:22px;font-weight:800;line-height:1}
+.gm-soon .gm-name{font-size:11.5px;font-weight:600}
 .status .dot.idle{background:#F0B232;box-shadow:0 0 0 3px rgba(240,178,50,.2)}
 .status .dot.dnd{background:#F23F43;box-shadow:0 0 0 3px rgba(242,63,67,.2)}
 .status .dot.off{background:#80848E;box-shadow:0 0 0 3px rgba(128,132,142,.2)}
@@ -453,6 +473,9 @@ body.away #branches{opacity:.55}
   #clockSvg{width:88%;height:88%}
   #w-sched{padding:14px 16px}
   #w-dc{grid-column:span 4;padding:14px 16px}
+  #w-games{padding:12px;gap:8px}
+  .gm-grid{grid-template-columns:1fr;grid-template-rows:1.7fr 1fr}
+  .gm-soon{flex-direction:row}
   #w-note{min-height:0;padding:14px 12px 10px;transform:rotate(-1.5deg)}
   #w-note:hover{transform:rotate(-1.5deg)}
   .note-list{gap:1px;font-size:12.5px}
