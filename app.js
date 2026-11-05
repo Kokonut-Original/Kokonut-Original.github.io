@@ -83,6 +83,7 @@ var STR = {
       contactH:"Nói chuyện với mình.",contactSub:"Email là nhanh nhất. Discord cũng được, bấm là copy tên.",
       mainMail:"Email chính",altMail:"Email phụ",copy:"Copy",madeWith:"Viết bằng HTML, CSS, JS thuần. Không dùng cookie.",
       session:"đã ở đây ",home:"Trang chính",toDark:"Chuyển sang nền tối",toLight:"Chuyển sang nền sáng",
+      replaySwarm:"Phát lại hiệu ứng hoa anh đào",
       dc:{online:"Đang online",idle:"Đang treo máy",dnd:"Đừng làm phiền",offline:"Đang offline",none:"Chưa kết nối"},
       dcPlay:"Đang chơi",dcListen:"Đang nghe",dcMin:" phút",dcHr:" giờ",dcIdleLine:"Không làm gì cả, chắc đang ngủ full time",dcSetup:"Thêm Discord ID trong app.js để hiện trạng thái",
       days:["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"],short:["CN","T2","T3","T4","T5","T6","T7"],
@@ -111,6 +112,7 @@ var STR = {
       contactH:"Say hi.",contactSub:"Email is fastest. Discord works too, tap to copy the name.",
       mainMail:"Main email",altMail:"Backup email",copy:"Copy",madeWith:"Plain HTML, CSS and JS. No cookies.",
       session:"been here ",home:"Home",toDark:"Switch to dark",toLight:"Switch to light",
+      replaySwarm:"Replay the cherry blossom animation",
       dc:{online:"Online",idle:"Idle",dnd:"Do not disturb",offline:"Offline",none:"Not connected"},
       dcPlay:"Playing",dcListen:"Listening to",dcMin:" min",dcHr:" h",dcIdleLine:"Doing nothing, probably sleeping full time",dcSetup:"Add a Discord ID in app.js to show live status",
       days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],short:["Su","Mo","Tu","We","Th","Fr","Sa"],
@@ -185,6 +187,8 @@ function applyLang(){
   $("langVi").setAttribute("aria-pressed", lang === "vi");
   $("langEn").setAttribute("aria-pressed", lang === "en");
   $("langBn").setAttribute("aria-pressed", lang === "bn");
+  $("swarmBtn").setAttribute("aria-label", t("replaySwarm"));
+  $("swarmBtn").title = t("replaySwarm");
   renderers.forEach(function(fn){ fn(); });
 }
 function setLang(l){ lang = l; try{ localStorage.setItem("lang", l); }catch(e){} applyLang(); }
