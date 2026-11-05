@@ -79,9 +79,14 @@ body.away #branches{opacity:.55}
 .lang button{border:0;background:transparent;padding:2px 8px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--fg-3);cursor:pointer;min-height:22px}
 .lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 #mbClock{color:var(--fg-2)}
-.theme-btn{width:28px;height:24px;display:grid;place-items:center;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--fg-2);cursor:pointer;padding:0}
+.theme-btn,.swarm-btn{width:28px;height:24px;display:grid;place-items:center;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--fg-2);cursor:pointer;padding:0}
 .theme-btn:hover{color:var(--fg)}
 .theme-btn svg{width:14px;height:14px}
+.swarm-btn{width:auto;padding:0 7px;display:flex;align-items:center;justify-content:center;gap:4px;color:var(--accent);background:var(--glass);font-size:11px;font-weight:700}
+.swarm-btn svg{width:15px;height:15px}
+.swarm-btn:hover,.swarm-btn:active{background:var(--accent-soft)}
+body.away .swarm-btn{visibility:hidden}
+.sakura-swarm{position:fixed;inset:0;width:100%;height:100%;z-index:8;pointer-events:none}
 
 /* ---------- desktop (first screen) ---------- */
 .desk{position:relative;z-index:5;height:var(--vh);min-height:760px;padding-top:34px}
@@ -443,6 +448,8 @@ body.away #branches{opacity:.55}
 @media (max-width:900px){
   html,body{height:100%;overflow:hidden}
   .menubar{background:transparent;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .swarm-btn{width:36px;height:32px;padding:0}
+  .swarm-btn span{display:none}
   .mb-sub,.mb-sec,#mbClock,.dots,.folders,.veil{display:none}
   body.app-open .menubar{display:none}
   #branches,body.away #branches{opacity:.35}
@@ -541,7 +548,11 @@ body.away #branches{opacity:.55}
   .homebar{display:grid;place-items:center;position:fixed;left:0;right:0;bottom:0;z-index:66;height:calc(env(safe-area-inset-bottom,0px) + 30px);border:0;background:none;padding:0 0 env(safe-area-inset-bottom,0px);cursor:pointer;touch-action:none}
   .homebar i{width:134px;height:5px;border-radius:3px;background:var(--fg);opacity:.8}
 }
-@media (max-width:420px){ .steps{grid-template-columns:1fr} }
+@media (max-width:420px){
+  .menubar,.mb-left,.mb-right{gap:8px}
+  .mb-name{overflow:hidden;text-overflow:ellipsis}
+  .steps{grid-template-columns:1fr}
+}
 @media (prefers-reduced-motion:reduce){
   .disc,.note-list input.holo,#w-note.shake,.active .st,.caret::after{animation:none}
   .toast{transition:opacity .2s}
