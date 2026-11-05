@@ -82,7 +82,7 @@ body.away #branches{opacity:.55}
 .theme-btn,.swarm-btn{width:28px;height:24px;display:grid;place-items:center;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--fg-2);cursor:pointer;padding:0}
 .theme-btn:hover{color:var(--fg)}
 .theme-btn svg{width:14px;height:14px}
-.swarm-btn{color:var(--accent)}
+.swarm-btn{width:auto;padding:0 7px;display:flex;align-items:center;justify-content:center;gap:4px;color:var(--accent);background:var(--glass);font-size:11px;font-weight:700}
 .swarm-btn svg{width:15px;height:15px}
 .swarm-btn:hover,.swarm-btn:active{background:var(--accent-soft)}
 body.away .swarm-btn{visibility:hidden}
@@ -448,7 +448,8 @@ body.away .swarm-btn{visibility:hidden}
 @media (max-width:900px){
   html,body{height:100%;overflow:hidden}
   .menubar{background:transparent;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none}
-  .swarm-btn{width:36px;height:32px}
+  .swarm-btn{width:36px;height:32px;padding:0}
+  .swarm-btn span{display:none}
   .mb-sub,.mb-sec,#mbClock,.dots,.folders,.veil{display:none}
   body.app-open .menubar{display:none}
   #branches,body.away #branches{opacity:.35}
